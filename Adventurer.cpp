@@ -6,6 +6,16 @@ using namespace std;
 
 class Adventurer{
 public:
+
+        Adventurer (string newname){
+            Name = newname;
+            Dexterity = 0;
+            Strength = 0;
+            Constitution = 0;
+            Intelligence = 0;
+            Charisma = 0;
+            Wisdom = 0;
+        }
         int getDexterity(){
             return this->Dexterity;
         }
