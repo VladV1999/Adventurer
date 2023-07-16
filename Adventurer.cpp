@@ -1,11 +1,14 @@
 #include <iostream>
-#include <random>
 #include <string>
+#include <random>
+#include <list>
+#include <array>
+#include <iterator>
 
 using namespace std;
 
 class Adventurer{
-public:
+    public:
 
         Adventurer (string newname){
             Name = newname;
@@ -67,31 +70,29 @@ public:
 
 
     private:
-    string Name;
-    int Dexterity;
-    int Strength;
-    int Constitution;
-    int Intelligence;
-    int Charisma;
-    int Wisdom;
+        string Name;
+        int Dexterity;
+        int Strength;
+        int Constitution;
+        int Intelligence;
+        int Charisma;
+        int Wisdom;  
 };
 int main(){
-    Adventurer advent;
-    advent.Charisma = 0;
-    advent.Constitution = 0;
-    advent.Dexterity = 0;
-    advent.Intelligence = 0;
-    advent.Name = "Vlad";
-    advent.Charisma = 0;
-    advent.Wisdom = 0;
-
-    cout << "The adventurer's name is " << advent.Name << endl;
-    cout << "His stats are " << endl;
-    cout << "Charisma = " << advent.Charisma << endl;
-    cout << "Constitution = " << advent.Constitution << endl;
-    cout << "Dexterity = " << advent.Dexterity << endl;
-    cout << "Intelligence = "<< advent.Intelligence << endl;
-    cout << "Strength = " << advent.Strength << endl;
-    cout << "Wisdom = " <<advent.Wisdom << endl;
+    int numAdvent;
+    list<Adventurer> adventurerList; 
+    cout << "How many adventurers would you like to create? " << endl;
+    cin >> numAdvent;
+    for (int i=0; i<numAdvent; i++){
+        string adventName;
+        cout << "Enter name for Adventurer " << i+1 << endl;
+        cin >> adventName; 
+        Adventurer advent(adventName);
+        adventurerList.push_back(advent);
+    }
+    list<Adventurer>::iterator adventureritr;
+    for (adventureritr=adventurerList.begin(); adventureritr !=adventurerList.end(); adventureritr++){
+        adventureritr->display();
+    }
     return 0;
 };
