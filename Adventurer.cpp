@@ -16,6 +16,15 @@ public:
             Charisma = 0;
             Wisdom = 0;
         }
+        void display(){
+            cout << "Name: " << this->getName() << endl;
+            cout << "Dexterity: " << this->getDexterity() << endl;
+            cout << "Strength: " << this->getStrength() << endl;
+            cout << "Constitution: " << this->getConstitution() << endl;
+            cout << "Intelligence: " << this->getIntelligence() << endl;
+            cout << "Charisma: " << this->getCharisma() << endl;
+            cout << "Wisdom: " << this->getWisdom() << endl;
+        }
         int getDexterity(){
             return this->Dexterity;
         }
