@@ -21,6 +21,12 @@ class Adventurer {
             Wisdom = getRandomNumber(4, 6);
             Level = 1;
         }
+        void levelUp() {
+            cout << "Your previous level was " << this->Level << endl;
+            this->Level=this->Level+1;
+            cout << "Your current level is " << this->Level << endl;
+        }
+                    
         void display() {
             cout << "Name: " << this->getName() << endl;
             cout << "Dexterity: " << this->getDexterity() << endl;
@@ -71,8 +77,9 @@ class Adventurer {
         void setName(string _Name) {
             this->Name = _Name;
         }
-
-
+        int getLevel() {
+            return this->Level;
+        }
     private:
         string Name;
         int Dexterity;
@@ -80,7 +87,9 @@ class Adventurer {
         int Constitution;
         int Intelligence;
         int Charisma;
-        int Wisdom;  
+        int Wisdom;
+        int Level;
+
         int getRandomNumber(int min, int max) {
             random_device rd;
             mt19937 gen(rd());
@@ -90,14 +99,27 @@ class Adventurer {
 };
 int main() {
     int numAdvent;
-    list<Adventurer> adventurerList; 
+    list<Adventurer> adventurerList;
     cout << "How many adventurers would you like to create? " << endl;
     cin >> numAdvent;
     for (int i = 0; i < numAdvent; i++) {
         string adventName;
+        string levelUpInput;
         cout << "Enter name for Adventurer " << i + 1 << endl;
-        cin >> adventName; 
+        cin >> adventName;
         Adventurer advent(adventName);
+        advent.levelUp();
+        while(true){
+            cout << "Would you like to increase your Adventurer's level further? " << endl;
+            cin >> levelUpInput;
+            if(levelUpInput == "yes" || levelUpInput == "y"){
+                advent.levelUp();
+            } else if (levelUpInput == "no" || levelUpInput == "n"){
+                break;
+            } else {
+                cout << "Invalid input. Please enter \"(Y)es\" or \"(N)o\" " << endl;
+            }
+        }
         adventurerList.push_back(advent);
     }
     list<Adventurer>::iterator adventureritr;
