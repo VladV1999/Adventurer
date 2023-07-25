@@ -102,6 +102,12 @@ class Adventurer {
         int getLevel() {
             return this->Level;
         }
+        int getRandomNumber(int min, int max) {
+            random_device rd;
+            mt19937 gen(rd());
+            uniform_int_distribution<int> dis(min, max);
+            return dis(gen);
+        }
     private:
         string Name;
         int Dexterity;
@@ -113,47 +119,42 @@ class Adventurer {
         int Level;
 };
 
-void performLevelUp(Adventurer& advent)
-{
+void performLevelUp(Adventurer& advent) {
     advent.levelUp();
     int pointsToAllocate = 2;
-    if(pointsToAllocate > 0) {
+    if (pointsToAllocate > 0) {
         string attribute;
-        while (pointsToAllocate > 0){
-            cout << "Which attribute would you like to increase ?" << endl;
+        while (pointsToAllocate > 0) {
+            cout << "Which attribute would you like to increase?" << endl;
             cin >> attribute;
-            switch (attribute)
-            {
-            case "Dexterity":
+            if (attribute == "Dexterity") {
                 advent.addToDexterity(1);
-                cout << "Your Dexterity was increased by 1 " << endl;
-                break;
-            case "Strength":
-                advent.addToStrength(1);
-                cout << "Your Strength was increased by 1 " << endl;
-                break;
-            case "Charisma":
-                advent.addToCharisma(1);
-                cout << "Your Charisma was increased by 1 " << endl;
-                break;
-            case "Intelligence":
-                advent.addToIntelligence(1);
-                cout << "Your Intelligence was increased by 1 " << endl;
-                break;
-            case "Constitution":
-                advent.addToConstitution(1);
-                cout << "Your Constitution was increased by 1 " << endl;
-                break;
-            case "Wisdom":
-                advent.addToWisdom(1);
-                cout << "Your Wisdom was increased by 1 " << endl;
-                break;
-            
-            default:
-                cout << "Please enter a valid attribute " << endl;
-                break;
+                cout << "Your Dexterity was increased by 1" << endl;
             }
-            pointsToAllocate --;
+            else if (attribute == "Strength") {
+                advent.addToStrength(1);
+                cout << "Your Strength was increased by 1" << endl;
+            }
+            else if (attribute == "Charisma") {
+                advent.addToCharisma(1);
+                cout << "Your Charisma was increased by 1" << endl;
+            }
+            else if (attribute == "Intelligence") {
+                advent.addToIntelligence(1);
+                cout << "Your Intelligence was increased by 1" << endl;
+            }
+            else if (attribute == "Constitution") {
+                advent.addToConstitution(1);
+                cout << "Your Constitution was increased by 1" << endl;
+            }
+            else if (attribute == "Wisdom") {
+                advent.addToWisdom(1);
+                cout << "Your Wisdom was increased by 1" << endl;
+            }
+            else {
+                cout << "Please enter a valid attribute" << endl;
+            }
+            pointsToAllocate--;
         }
     }
 }
