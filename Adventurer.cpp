@@ -4,12 +4,11 @@
 #include <list>
 #include <array>
 #include <iterator>
-#include <random>
-#include <functional>
 
 using namespace std;
 
 class Adventurer {
+
     public:
         Adventurer(string newname) {
             Name = newname;
@@ -22,9 +21,7 @@ class Adventurer {
             Level = 1;
         }
         void levelUp() {
-            cout << "Your previous level was " << this->Level << endl;
             this->Level=this->Level+1;
-            cout << "Your current level is " << this->Level << endl;
         }
                     
         void display() {
@@ -68,6 +65,31 @@ class Adventurer {
         void setWisdom(int _Wisdom) {
             this->Wisdom = _Wisdom;
         }
+        
+        void addToWisdom(int points) {
+            this->Wisdom += points;
+        }
+
+        void addToStrength(int points) {
+            this->Strength += points;
+        }
+
+        void addToIntelligence(int points) {
+            this->Intelligence += points;
+        }
+
+        void addToDexterity(int points) {
+            this->Dexterity += points;
+        }
+
+        void addToConstitution(int points) {
+            this->Constitution += points;
+        }
+
+        void addToCharisma(int points) {
+            this->Charisma += points;
+        }
+
         int getWisdom() {
             return this->Wisdom;
         }
@@ -89,14 +111,53 @@ class Adventurer {
         int Charisma;
         int Wisdom;
         int Level;
-
-        int getRandomNumber(int min, int max) {
-            random_device rd;
-            mt19937 gen(rd());
-            uniform_int_distribution<int> dis(min, max);
-            return dis(gen);
-        }
 };
+
+void performLevelUp(Adventurer& advent)
+{
+    advent.levelUp();
+    int pointsToAllocate = 2;
+    if(pointsToAllocate > 0) {
+        string attribute;
+        while (pointsToAllocate > 0){
+            cout << "Which attribute would you like to increase ?" << endl;
+            cin >> attribute;
+            switch (attribute)
+            {
+            case "Dexterity":
+                advent.addToDexterity(1);
+                cout << "Your Dexterity was increased by 1 " << endl;
+                break;
+            case "Strength":
+                advent.addToStrength(1);
+                cout << "Your Strength was increased by 1 " << endl;
+                break;
+            case "Charisma":
+                advent.addToCharisma(1);
+                cout << "Your Charisma was increased by 1 " << endl;
+                break;
+            case "Intelligence":
+                advent.addToIntelligence(1);
+                cout << "Your Intelligence was increased by 1 " << endl;
+                break;
+            case "Constitution":
+                advent.addToConstitution(1);
+                cout << "Your Constitution was increased by 1 " << endl;
+                break;
+            case "Wisdom":
+                advent.addToWisdom(1);
+                cout << "Your Wisdom was increased by 1 " << endl;
+                break;
+            
+            default:
+                cout << "Please enter a valid attribute " << endl;
+                break;
+            }
+            pointsToAllocate --;
+        }
+    }
+}
+
 int main() {
     int numAdvent;
     list<Adventurer> adventurerList;
@@ -105,15 +166,17 @@ int main() {
     for (int i = 0; i < numAdvent; i++) {
         string adventName;
         string levelUpInput;
+        string attribute;
         cout << "Enter name for Adventurer " << i + 1 << endl;
         cin >> adventName;
         Adventurer advent(adventName);
-        advent.levelUp();
         while(true){
             cout << "Would you like to increase your Adventurer's level further? " << endl;
             cin >> levelUpInput;
             if(levelUpInput == "yes" || levelUpInput == "y"){
-                advent.levelUp();
+                performLevelUp(advent);
+                cout << "Your previous level was " << advent.getLevel() << endl;
+                cout << "Your current level is " << advent.getLevel() << endl;
             } else if (levelUpInput == "no" || levelUpInput == "n"){
                 break;
             } else {
