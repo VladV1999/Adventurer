@@ -5,6 +5,7 @@
 #include <array>
 #include <iterator>
 #include <unordered_map>
+#include <functional>
 
 using namespace std;
 
@@ -122,33 +123,50 @@ class Adventurer {
 
 void performLevelUp(Adventurer& advent) {
     advent.levelUp();
-    int pointsToAllocate =2;
+    int pointsToAllocate = 2;
     if (pointsToAllocate > 0) {
-        unordered_map<string, function<void(Adventurer&)>> attributeMap = {
-            { "Dexterity", &Adventurer::addToDexterity },
-            { "Strength", &Adventurer::addToStrength },
-            { "Charisma", &Adventurer::addToCharisma },
-            { "Intelligence", &Adventurer::addToIntelligence },
-            { "Constitution", &Adventurer::addToConstitution },
-            { "Wisdom", &Adventurer::addToWisdom }
-        };
-
         while (pointsToAllocate > 0) {
             string attribute;
             cout << "Which attribute would you like to increase?" << endl;
-            cin >>attribute;
-            auto it = attributeMap.find(attribute);
-            if (it!= attributeMap.end()) {
-                (it->second)(advent);
-                cout << "Your " << attribute << " was increased by 1" << endl;
+            cin >> attribute;
+
+            if (attribute == "Dexterity") {
+                advent.addToDexterity(1);
+                cout << "Your Dexterity was increased by 1" << endl;
                 pointsToAllocate--;
             }
-            else{
-                cout << "Please enter a valid attribute" << endl;
+            else if (attribute == "Strength") {
+                advent.addToStrength(1);
+                cout << "Your Strength was increased by 1" << endl;
+                pointsToAllocate--;
             }
+            else if (attribute == "Wisdom") {
+                advent.addToWisdom(1);
+                cout << "Your Wisdom was increased by 1" << endl;
+                pointsToAllocate--;
+            }
+            else if (attribute == "Charisma") {
+                advent.addToCharisma(1);
+                cout << "Your Charisma was increased by 1" << endl;
+                pointsToAllocate--;
+            }
+            else if (attribute == "Intelligence") {
+                advent.addToIntelligence(1);
+                cout << "Your Intelligence was increased by 1" << endl;
+                pointsToAllocate--;
+            }
+            else if (attribute == "Constitution") {
+                advent.addToConstitution(1);
+                cout << "Your Constitution was increased by 1" << endl;
+                pointsToAllocate--;
+            }
+
+            else {
+                cout << "Please enter a valid attribute" << endl;
             }
         }
     }
+};
 
 int main() {
     int numAdvent;
