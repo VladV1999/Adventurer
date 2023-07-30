@@ -120,6 +120,46 @@ class Adventurer {
         int Wisdom;
         int Level;
 };
+class Inventory {
+public:
+    int getRandomDie(int min, int max) {
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_int_distribution<int> dis(min, max);
+        return dis(gen);
+    }
+    
+    void rollADieForGold(int min, int max) {
+        int result = getRandomDie(min, max);
+        result *= 10;
+        result *=5;
+        this->Gold = result;
+        cout << "Your gold is " << result << endl;
+    }
+    int getGold() {
+        return this->Gold;
+    }
+    void setGold (int _Gold) {
+        this->Gold = _Gold;
+    }
+    string getArmor() {
+        return this->Armor;
+    }
+    void setArmor (int _Armor) {
+        this->Armor = _Armor;
+    }
+    string getWeapon() {
+        return this->Weapon;
+    }
+    void setWeapon (int _Weapon) {
+        this->Weapon = _Weapon;
+    }
+    
+private:
+    int Gold = 1;
+    string Armor = "Great Chainmail";
+    string Weapon = "Sword of Fire";
+};
 
 void performLevelUp(Adventurer& advent) {
     advent.levelUp();
@@ -199,5 +239,7 @@ int main() {
     for (adventureritr = adventurerList.begin(); adventureritr != adventurerList.end(); adventureritr++) {
         adventureritr->display();
     }
+    Inventory inventory;
+    inventory.rollADieForGold(1, 4);
     return 0;
 };
