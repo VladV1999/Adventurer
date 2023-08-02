@@ -120,6 +120,103 @@ class Adventurer {
         int Wisdom;
         int Level;
 };
+class Class {
+    public:
+    string getCleric() {
+        return this->Cleric;
+    }
+    void setCleric (string _Cleric) {
+        this->Cleric = _Cleric;
+    }
+    string getArtificier() {
+        return this->Artificier;
+    }
+    void setArtificier (string _Artificier) {
+        this->Artificier = _Artificier;
+    }
+    string getBarbarian() {
+        return this->Barbarian;
+    }
+    void setBarbarian (string _Barbarian) {
+        this->Barbarian = _Barbarian;
+    }
+    string getBard() {
+        return this->Bard;
+    }
+    void setBard (string _Bard) {
+        this->Bard = _Bard;
+    }
+    string getDruid() {
+        return this->Druid;
+    }
+    void setDruid (string _Druid) {
+        this->Druid = _Druid;
+    }
+    string getFighter() {
+        return this->Fighter;
+    }
+    void setFighter (string _Fighter) {
+        this->Fighter = _Fighter;
+    }
+    string getMonk() {
+        return this->Monk;
+    }
+    void setMonk (string _Monk) {
+        this->Monk = _Monk;
+    }
+    string getPaladin() {
+        return this->Paladin;
+    }
+    void setPaladin (string _Paladin) {
+        this->Paladin = _Paladin;
+    }
+    string getRanger() {
+        return this->Ranger;
+    }
+    void setRanger (string _Ranger) {
+        this->Ranger = _Ranger;
+    }
+    string getRogue() {
+        return this->Rogue;
+    }
+    void setRogue (string _Rogue) {
+        this->Rogue = _Rogue;
+    }
+    string getSorcerer() {
+        return this->Sorcerer;
+    }
+    void setSorcerer (string _Sorcerer) {
+        this->Sorcerer = _Sorcerer;
+    }
+    string getWarlock() {
+        return this->Warlock;
+    }
+    void setWarlock (string _Warlock) {
+        this->Warlock = _Warlock;
+    }
+    string getWizard() {
+        return this->Wizard;
+    }
+    void setWizard (string _Wizard) {
+        this->Wizard = _Wizard;
+    }
+    
+    private:
+    string Cleric;
+    string Artificier;
+    string Barbarian;
+    string Bard;
+    string Druid;
+    string Fighter;
+    string Monk;
+    string Paladin;
+    string Ranger;
+    string Rogue;
+    string Sorcerer;
+    string Warlock;
+    string Wizard;
+}
+
 class Inventory {
 public:
     int getRandomDie(int min, int max) {
@@ -154,6 +251,8 @@ public:
     void setWeapon (int _Weapon) {
         this->Weapon = _Weapon;
     }
+    void receiveGear() {
+        }
     
 private:
     int Gold = 1;
