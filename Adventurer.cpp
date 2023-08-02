@@ -202,7 +202,7 @@ class ClassChoice {
         this->Wizard = _Wizard;
     }
     void classDetermination() {
-        map<string, string> classMap;
+        unordered_map<string, string> classMap;
         string input;
         bool validChoice = false;
         while (!validChoice) {
