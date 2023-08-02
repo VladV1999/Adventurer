@@ -3,6 +3,7 @@
 #include <random>
 #include <list>
 #include <array>
+#include <map>
 #include <iterator>
 #include <unordered_map>
 #include <functional>
@@ -120,7 +121,7 @@ class Adventurer {
         int Wisdom;
         int Level;
 };
-class Class {
+class ClassChoice {
     public:
     string getCleric() {
         return this->Cleric;
@@ -200,7 +201,34 @@ class Class {
     void setWizard (string _Wizard) {
         this->Wizard = _Wizard;
     }
-    
+    void classDetermination() {
+        map<string, string> classMap;
+        string input;
+        bool validChoice = false;
+        while (!validChoice) {
+        cout << "What class would you like to choose? " << endl;
+        cin >> input;
+        classMap["Cleric"] = " ";
+        classMap["Artificier"] = " ";
+        classMap["Barbarian"] = " ";
+        classMap["Bard"] = " ";
+        classMap["Druid"] = " ";
+        classMap["Fighter"] = " ";
+        classMap["Monk"] = " ";
+        classMap["Paladin"] = " ";
+        classMap["Ranger"] = " ";
+        classMap["Sorcerer"] = " ";
+        classMap["Warlock"] = " ";
+        classMap["Wizard"] = " ";
+        if (classMap.find(input) != classMap.end()) {
+            cout << "You have chosen " << input << classMap[input] << endl;
+            validChoice = true;
+        }
+        else {
+            cout << "Please choose a valid class " << endl;
+        }
+    }
+    }
     private:
     string Cleric;
     string Artificier;
@@ -215,7 +243,7 @@ class Class {
     string Sorcerer;
     string Warlock;
     string Wizard;
-}
+};
 
 class Inventory {
 public:
@@ -225,7 +253,6 @@ public:
         uniform_int_distribution<int> dis(min, max);
         return dis(gen);
     }
-    
     void rollADieForGold(int min, int max) {
         int result = getRandomDie(min, max);
         result *= 10;
@@ -256,8 +283,8 @@ public:
     
 private:
     int Gold = 1;
-    string Armor = "Great Chainmail";
-    string Weapon = "Sword of Fire";
+    string Armor;
+    string Weapon;
 };
 
 void performLevelUp(Adventurer& advent) {
@@ -340,5 +367,7 @@ int main() {
     }
     Inventory inventory;
     inventory.rollADieForGold(1, 4);
+    ClassChoice Clazz;
+    Clazz.classDetermination();
     return 0;
 };
