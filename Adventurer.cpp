@@ -220,6 +220,7 @@ class ClassChoice {
         classMap["Sorcerer"] = " ";
         classMap["Warlock"] = " ";
         classMap["Wizard"] = " ";
+        classMap["Rogue"] = " ";
         if (classMap.find(input) != classMap.end()) {
             cout << "You have chosen " << input << classMap[input] << endl;
             validChoice = true;
@@ -278,8 +279,15 @@ public:
     void setWeapon (int _Weapon) {
         this->Weapon = _Weapon;
     }
-    void receiveGear() {
-        }
+    // void receiveGear() {
+    //     ClassChoice ClazzChoize;
+    //     void playerClass = ClazzChoize.classDetermination();
+    //     if (playerClass == "Cleric") {
+    //         setArmor("Light Chainmail");
+    //         setWeapon("Morningstar and Light Shield");
+    //     }
+        
+    // }
     
 private:
     int Gold = 1;
@@ -369,5 +377,8 @@ int main() {
     inventory.rollADieForGold(1, 4);
     ClassChoice Clazz;
     Clazz.classDetermination();
+    for (adventureritr = adventurerList.begin(); adventureritr != adventurerList.end(); adventureritr++) {
+        adventureritr->display();
+    }
     return 0;
 };
