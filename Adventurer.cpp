@@ -15,17 +15,19 @@ class Inventory;
 
 Adventurer::Adventurer (string newname) {
 
-    Inventory inventory;
-            Name = newname;
-            Dexterity = getRandomNumber(4, 6);
-            Strength = getRandomNumber(4, 6);
-            Constitution = getRandomNumber(4, 6);
-            Intelligence = getRandomNumber(4, 6);
-            Charisma = getRandomNumber(4, 6);
-            Wisdom = getRandomNumber(4, 6);
-            Level = 1;
-        
+    //Inventory inventory;
+        Name = newname;
+        Dexterity = getRandomNumber(4, 6);
+        Strength = getRandomNumber(4, 6);
+        Constitution = getRandomNumber(4, 6);
+        Intelligence = getRandomNumber(4, 6);
+        Charisma = getRandomNumber(4, 6);
+        Wisdom = getRandomNumber(4, 6);
+        Level = 1;
+
 };
+
+/*
 class ClassChoice {
     public:
     string getCleric() {
@@ -106,37 +108,39 @@ class ClassChoice {
     void setWizard (string _Wizard) {
         this->Wizard = _Wizard;
     }
-    void classDetermination() {
+    std::string classDetermination() {
         unordered_map<string, string> classMap;
         string input;
         bool validChoice = false;
         while (!validChoice) {
-        cout << "What class would you like to choose? " << endl;
-        cin >> input;
-        classMap["Cleric"] = " ";
-        classMap["Artificier"] = " ";
-        classMap["Barbarian"] = " ";
-        classMap["Bard"] = " ";
-        classMap["Druid"] = " ";
-        classMap["Fighter"] = " ";
-        classMap["Monk"] = " ";
-        classMap["Paladin"] = " ";
-        classMap["Ranger"] = " ";
-        classMap["Sorcerer"] = " ";
-        classMap["Warlock"] = " ";
-        classMap["Wizard"] = " ";
-        classMap["Rogue"] = " ";
-        if (classMap.find(input) != classMap.end()) {
-            cout << "You have chosen " << input << classMap[input] << endl;
-            validChoice = true;
+            cout << "What class would you like to choose? " << endl;
+            cin >> input;
+            classMap["Cleric"] = " ";
+            classMap["Artificier"] = " ";
+            classMap["Barbarian"] = " ";
+            classMap["Bard"] = " ";
+            classMap["Druid"] = " ";
+            classMap["Fighter"] = " ";
+            classMap["Monk"] = " ";
+            classMap["Paladin"] = " ";
+            classMap["Ranger"] = " ";
+            classMap["Sorcerer"] = " ";
+            classMap["Warlock"] = " ";
+            classMap["Wizard"] = " ";
+            classMap["Rogue"] = " ";
+            if (classMap.find(input) != classMap.end()) {
+                cout << "You have chosen " << input << classMap[input] << endl;
+                validChoice = true;
+            }
+            else {
+                cout << "Please choose a valid class " << endl;
+            }
         }
-        else {
-            cout << "Please choose a valid class " << endl;
-        }
-    }
+
+        return input;
     }
     private:
-    string Cleric;
+    Inventory startingInventoryCleric;
     string Artificier;
     string Barbarian;
     string Bard;
@@ -150,6 +154,7 @@ class ClassChoice {
     string Warlock;
     string Wizard;
 };
+*/
 
 class Inventory {
 public:
@@ -175,16 +180,19 @@ public:
     string getArmor() {
         return this->Armor;
     }
-    void setArmor (int _Armor) {
+    void setArmor (string _Armor) {
         this->Armor = _Armor;
     }
     string getWeapon() {
         return this->Weapon;
     }
-    void setWeapon (int _Weapon) {
+    void setWeapon (string _Weapon) {
         this->Weapon = _Weapon;
     }
-    // void receiveGear() {
+
+    //initialize
+    //Constructor
+    // void startingInventory() {
     //     ClassChoice ClazzChoize;
     //     void playerClass = ClazzChoize.classDetermination();
     //     if (playerClass == "Cleric") {
@@ -199,6 +207,60 @@ private:
     string Armor;
     string Weapon;
 };
+
+Inventory generateInitialInventory(std::string theClass) {
+    Inventory bagOfHolding;
+    if (theClass == "Cleric") {
+        bagOfHolding.setArmor("Light Chainmail");
+        bagOfHolding.setWeapon("Morningstar and Light Shield");
+    }
+    else {
+        std::cerr << "Invalid Class" << '\n';
+    }
+
+    return bagOfHolding;
+}
+// After thinking about it, will this simply be a normal set?
+// Or perhaps a type of inventory (the generation of initial inventory is fine but I can't seem to get)
+// the set for it.
+// Is it even necessary?
+//  Inventory setInitialInventory() {
+
+//  }
+
+std::string promptForClass() {
+    unordered_map<string, string> classMap;
+    classMap["Cleric"] = " ";
+    classMap["Artificier"] = " ";
+    classMap["Barbarian"] = " ";
+    classMap["Bard"] = " ";
+    classMap["Druid"] = " ";
+    classMap["Fighter"] = " ";
+    classMap["Monk"] = " ";
+    classMap["Paladin"] = " ";
+    classMap["Ranger"] = " ";
+    classMap["Sorcerer"] = " ";
+    classMap["Warlock"] = " ";
+    classMap["Wizard"] = " ";
+    classMap["Rogue"] = " ";
+
+    string selectedClass;
+    bool validChoice = false;
+    while (!validChoice) {
+        cout << "What class would you like to choose? " << endl;
+        cin >> selectedClass;
+
+        if (classMap.find(selectedClass) != classMap.end()) {
+            cout << "You have chosen " << selectedClass << classMap[selectedClass] << endl;
+            validChoice = true;
+        }
+        else {
+            cout << "Please choose a valid class " << endl;
+        }
+    }
+
+    return selectedClass;
+}
 
 void performLevelUp(Adventurer& advent) {
     advent.levelUp();
@@ -280,10 +342,28 @@ int main() {
     }
     Inventory inventory;
     inventory.rollADieForGold(1, 4);
-    ClassChoice Clazz;
-    Clazz.classDetermination();
+    //ClassChoice Clazz;
+    //Clazz.classDetermination();
+    
     for (adventureritr = adventurerList.begin(); adventureritr != adventurerList.end(); adventureritr++) {
         adventureritr->display();
     }
+    // for (const Adventurer& adventurer : adventurerList) {
+    //     //Did Dr. Kennedy mean adventureritr?
+    //     //simply having adventurer here displays the message of:
+    //     //passing 'const Adventurer' as 'this' argument discards qualifiers [-fpermissive]
+    //     adventurer.display();
+    // }
+
+
+    //--------------------------------------------------------------------------
+    std::string selectedClass = promptForClass();
+    // Generate starting inventory
+    // Generate starting skills
+    // Generate starting spells
+    Inventory startingInventory = generateInitialInventory(selectedClass);
+    Adventurer me("A. Noob");
+    // me.setInventory(startingInventory);
+
     return 0;
 };
