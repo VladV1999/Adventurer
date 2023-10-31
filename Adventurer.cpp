@@ -1,3 +1,4 @@
+/// instead of string inputs try to do string enums they will help you locate an error at compile time
 #include <iostream>
 #include <string>
 #include <random>
@@ -8,10 +9,38 @@
 #include <unordered_map>
 #include <functional>
 #include "Adventurer.h"
+#include <unordered_set>
 
 using namespace std;
 
 class Inventory;
+
+enum class Attribute {
+    Dexterity,
+    Strength,
+    Wisdom,
+    Charisma,
+    Intelligence,
+    Constitution,
+    InvalidAttribute
+};
+
+enum class CharacterClass {
+    Cleric,
+    Artificier,
+    Barbarian,
+    Bard,
+    Druid,
+    Fighter,
+    Monk,
+    Paladin,
+    Ranger,
+    Sorcerer,
+    Warlock,
+    Wizard,
+    Rogue,
+    InvalidClass
+};
 
 Adventurer::Adventurer (string newname) {
 
@@ -26,6 +55,65 @@ Adventurer::Adventurer (string newname) {
         Level = 1;
 
 };
+
+static const unordered_map<string, Attribute> attributeMap = {
+    {"Dexterity", Attribute::Dexterity},
+    {"Strength", Attribute::Strength},
+    {"Wisdom", Attribute::Wisdom},
+    {"Charisma", Attribute::Charisma},
+    {"Intelligence", Attribute::Intelligence},
+    {"Constitution", Attribute::Constitution},
+    {"Invalid", Attribute::InvalidAttribute}
+};
+
+static const unordered_map<string, CharacterClass> characterClassMap = {
+    {"Cleric", CharacterClass::Cleric},
+    {"Artificier", CharacterClass::Artificier},
+    {"Barbarian", CharacterClass::Barbarian},
+    {"Bard", CharacterClass::Bard},
+    {"Druid", CharacterClass::Druid},
+    {"Fighter", CharacterClass::Fighter},
+    {"Monk", CharacterClass::Monk},
+    {"Paladin", CharacterClass::Paladin},
+    {"Ranger", CharacterClass::Ranger},
+    {"Sorcerer", CharacterClass::Sorcerer},
+    {"Warlock", CharacterClass::Warlock},
+    {"Wizard", CharacterClass::Wizard},
+    {"Rogue", CharacterClass::Rogue},
+    {"Invalid", CharacterClass::InvalidClass}
+};
+
+template<typename EnumType>
+EnumType stringToEnum(const string& str, const unordered_map<string, EnumType>& lookupTable, const EnumType defaultValue) {
+    const auto it = lookupTable.find(str);
+
+    if (it == lookupTable.end()) {        
+        return defaultValue;
+    }
+    
+    const EnumType foundValue = it->second;
+    return foundValue;
+}
+
+Attribute attributeStringToEnum(const string& str) {
+    /*
+    const auto it = attributeMap.find(str);
+
+    if (it == attributeMap.end()) {
+        return Attribute::InvalidAttribute;
+    }
+    
+    return it->second;
+    
+    ///The line above i'm a bit unsure of, wouldn't it return dexterity by all means?
+    */
+    return stringToEnum(str, attributeMap, Attribute::InvalidAttribute);
+}
+
+CharacterClass classStringToEnum(const string& str) {
+    return stringToEnum(str, characterClassMap, CharacterClass::InvalidClass);
+}
+
 
 class Inventory {
 public:
@@ -75,7 +163,7 @@ Inventory generateInitialInventory(std::string theClass) {
         bagOfHolding.setWeapon("Morningstar and Light Shield");
     }
     else {
-        std::cerr << "Invalid Class" << '\n';
+        cerr << "Invalid Class" << '\n';
     }
 
     return bagOfHolding;
@@ -88,30 +176,32 @@ Inventory generateInitialInventory(std::string theClass) {
 
 //  }
 
-std::string promptForClass() {
-    unordered_map<string, string> classMap;
-    classMap["Cleric"] = " ";
-    classMap["Artificier"] = " ";
-    classMap["Barbarian"] = " ";
-    classMap["Bard"] = " ";
-    classMap["Druid"] = " ";
-    classMap["Fighter"] = " ";
-    classMap["Monk"] = " ";
-    classMap["Paladin"] = " ";
-    classMap["Ranger"] = " ";
-    classMap["Sorcerer"] = " ";
-    classMap["Warlock"] = " ";
-    classMap["Wizard"] = " ";
-    classMap["Rogue"] = " ";
+string promptForClass() {
+    unordered_set<string> classSet = {
+        "Cleric",
+        "Artificier",
+        "Barbarian",
+        "Bard",
+        "Druid",
+        "Fighter",
+        "Monk",
+        "Paladin",
+        "Ranger",
+        "Sorcerer",
+        "Warlock",
+        "Wizard",
+        "Rogue"
+    };
 
     string selectedClass;
     bool validChoice = false;
+    Attribute Attribute = attributeStringToEnum(selectedClass); ///First test case of using string to string Enum
     while (!validChoice) {
         cout << "What class would you like to choose? " << endl;
         cin >> selectedClass;
 
-        if (classMap.find(selectedClass) != classMap.end()) {
-            cout << "You have chosen " << selectedClass << classMap[selectedClass] << endl;
+        if (classSet.find(selectedClass) != classSet.end()) {
+            cout << "You have chosen " << selectedClass << endl;
             validChoice = true;
         }
         else {
@@ -127,36 +217,37 @@ void performLevelUp(Adventurer& advent) {
     int pointsToAllocate = 2;
     if (pointsToAllocate > 0) {
         while (pointsToAllocate > 0) {
-            string attribute;
+            string attributeStr;
             cout << "Which attribute would you like to increase?" << endl;
-            cin >> attribute;
+            cin >> attributeStr;
+            Attribute attribute = attributeStringToEnum(attributeStr);
 
-            if (attribute == "Dexterity") {
+            if (attribute == Attribute::Dexterity) {
                 advent.addToDexterity(1);
                 cout << "Your Dexterity was increased by 1" << endl;
                 pointsToAllocate--;
             }
-            else if (attribute == "Strength") {
+            else if (attribute == Attribute::Strength) {
                 advent.addToStrength(1);
                 cout << "Your Strength was increased by 1" << endl;
                 pointsToAllocate--;
             }
-            else if (attribute == "Wisdom") {
+            else if (attribute == Attribute::Wisdom) {
                 advent.addToWisdom(1);
                 cout << "Your Wisdom was increased by 1" << endl;
                 pointsToAllocate--;
             }
-            else if (attribute == "Charisma") {
+            else if (attribute == Attribute::Charisma) {
                 advent.addToCharisma(1);
                 cout << "Your Charisma was increased by 1" << endl;
                 pointsToAllocate--;
             }
-            else if (attribute == "Intelligence") {
+            else if (attribute == Attribute::Intelligence) {
                 advent.addToIntelligence(1);
                 cout << "Your Intelligence was increased by 1" << endl;
                 pointsToAllocate--;
             }
-            else if (attribute == "Constitution") {
+            else if (attribute == Attribute:: Constitution) {
                 advent.addToConstitution(1);
                 cout << "Your Constitution was increased by 1" << endl;
                 pointsToAllocate--;
