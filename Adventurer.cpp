@@ -195,7 +195,7 @@ string promptForClass() {
 
     string selectedClass;
     bool validChoice = false;
-    Attribute Attribute = attributeStringToEnum(selectedClass); ///First test case of using string to string Enum
+    Attribute Attribute = attributeStringToEnum(selectedClass); 
     while (!validChoice) {
         cout << "What class would you like to choose? " << endl;
         cin >> selectedClass;
