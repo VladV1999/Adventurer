@@ -10,6 +10,7 @@
 #include <functional>
 #include "Adventurer.h"
 #include <unordered_set>
+#include <vector>
 
 using namespace std;
 
@@ -117,6 +118,39 @@ CharacterClass classStringToEnum(const string& str) {
 
 class Inventory {
 public:
+    static const int Inventory_Size = 16;
+
+    class Item {
+        public:
+            string name;
+
+            Item(const string& itemName) : name(itemName){}
+    };
+
+    Inventory() : grid(Inventory_Size, nullptr){}
+
+    bool addItem(Item* newItem) {
+        for (int i =0; i< Inventory_Size; i++) {
+            if (grid[i] == nullptr) {
+                grid[i] = newItem;
+                return true;
+            }
+        }
+        cout << "Inventory is full " << endl;
+        return false;
+    }
+    // not really sure about making this const-- at one side it is const until added on the other this just feels wrong-- but the display ITSELF is constant
+    void DisplayInventory() const {
+        for (int i = 0; i < Inventory_Size; i++){
+            if (grid[i] != nullptr) {
+                cout << grid[i]->name << "\t";
+            }
+            else {
+                cout << "Empty\t";
+            }
+        }
+        cout << endl;
+    }
     int getRandomDie(int min, int max) {
         random_device rd;
         mt19937 gen(rd());
@@ -154,6 +188,7 @@ private:
     int Gold = 1;
     string Armor;
     string Weapon;
+    vector <Item*> grid;
 };
 
 Inventory generateInitialInventory(std::string theClass) {
@@ -292,29 +327,23 @@ int main() {
         adventureritr->display();
     }
     Inventory inventory;
+    Inventory::Item sword("Sword");
+    Inventory::Item shield("Shield");
+    Inventory::Item potion("Health Potion");
+    inventory.addItem(&sword);
+    inventory.addItem(&shield);
+    inventory.addItem(&potion);
+    inventory.DisplayInventory();
     inventory.rollADieForGold(1, 4);
-    //ClassChoice Clazz;
-    //Clazz.classDetermination();
     
     for (adventureritr = adventurerList.begin(); adventureritr != adventurerList.end(); adventureritr++) {
         adventureritr->display();
     }
-    // for (const Adventurer& adventurer : adventurerList) {
-    //     //Did Dr. Kennedy mean adventureritr?
-    //     //simply having adventurer here displays the message of:
-    //     //passing 'const Adventurer' as 'this' argument discards qualifiers [-fpermissive]
-    //     adventurer.display();
-    // }
-
 
     //--------------------------------------------------------------------------
     std::string selectedClass = promptForClass();
-    // Generate starting inventory
-    // Generate starting skills
-    // Generate starting spells
     Inventory startingInventory = generateInitialInventory(selectedClass);
     Adventurer me("A. Noob");
-    // me.setInventory(startingInventory);
 
     return 0;
 };
