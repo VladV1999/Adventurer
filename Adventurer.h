@@ -1,8 +1,39 @@
+#ifndef ADVENTURER_H_INCLUDED
+#define ADVENTURER_H_INCLUDED
+
 #include <iostream>
 #include <random>
 #include <string>
 
-using namespace std;
+using std::string;
+using std::cout;
+
+enum class Attribute {
+    Dexterity,
+    Strength,
+    Wisdom,
+    Charisma,
+    Intelligence,
+    Constitution,
+    InvalidAttribute
+};
+
+enum class CharacterClass {
+    Cleric,
+    Artificier,
+    Barbarian,
+    Bard,
+    Druid,
+    Fighter,
+    Monk,
+    Paladin,
+    Ranger,
+    Sorcerer,
+    Warlock,
+    Wizard,
+    Rogue,
+    InvalidClass
+};
 
 class Adventurer {
     public:
@@ -75,25 +106,14 @@ class Adventurer {
             return this->Level;
         }
         int getRandomNumber(int min, int max) {
-            random_device rd;
-            mt19937 gen(rd());
-            uniform_int_distribution<int> dis(min, max);
-            return dis(gen);
+            return -1;
         }
         void levelUp() {
             this->Level=this->Level+1;
         }
                     
-        void display() {
-            cout << "Name: " << this->getName() << endl;
-            cout << "Dexterity: " << this->getDexterity() << endl;
-            cout << "Strength: " << this->getStrength() << endl;
-            cout << "Constitution: " << this->getConstitution() << endl;
-            cout << "Intelligence: " << this->getIntelligence() << endl;
-            cout << "Charisma: " << this->getCharisma() << endl;
-            cout << "Wisdom: " << this->getWisdom() << endl;
-            cout << "Level " << this->getLevel() << endl;
-        }
+        void display();
+
     private:
         string Name;
         int Dexterity;
@@ -105,3 +125,5 @@ class Adventurer {
         int Level;
 
 };
+
+#endif
