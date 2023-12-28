@@ -1,8 +1,10 @@
+#pragma once
 #ifndef Inventory_H_INCLUDED
 #define Inventory_H_INCLUDED
 #include <iostream>
 #include <random>
 #include <string>
+#include <vector>
 
 using namespace std;
 class Inventory {
@@ -19,20 +21,9 @@ public:
               }
     };
 
-    Inventory() 
-      : grid(Inventory_Size, nullptr)
-    {
-    }
+    Inventory();
 
-    bool addItem(Item* newItem) {
-        for (int i = 0; i< Inventory_Size; i++) {
-            if (grid[i] == nullptr) {
-                grid[i] = newItem;
-                return true;
-            }
-        }
-        cout << "Inventory is full " << endl;
-        return false;
+    bool addItem(Item* newItem);
 
         /*
         // Find the index of the next available slot
@@ -51,49 +42,25 @@ public:
         grid[idx] = newItem;
         return true;
         */
-
-    }
-
+    ;
+    
     // not really sure about making this const-- at one side it is const until added on the other this just feels wrong-- but the display ITSELF is constant
-    void display() const {
-        for (int i = 0; i < Inventory_Size; i++){
-            if (grid[i] != nullptr) {
-                cout << grid[i]->name << "\t";
-            }
-            else {
-                cout << "Empty\t";
-            }
-        }
-        cout << endl;
-    }
+    void display() const;
 
-    int getGold() {
-        return this->Gold;
-    }
+    int getGold();
 
-    void setGold (int _Gold) {
-        this->Gold = _Gold;
-    }
+    void setGold (int _Gold);
 
-    void addGold (Inventory& inv, int _Gold) {
-        this->Gold += _Gold;
-    }
+    void addGold (Inventory& inv, int _Gold);
 
-    string getArmor() {
-        return this->Armor;
-    }
+    string getArmor();
 
-    void setArmor (string _Armor) {
-        this->Armor = _Armor;
-    }
+    void setArmor (string _Armor);
 
-    string getWeapon() {
-        return this->Weapon;
-    }
+    string getWeapon();
 
-    void setWeapon (string _Weapon) {
-        this->Weapon = _Weapon;
-    }
+    void setWeapon (string _Weapon);
+
 /*
 void rollADieForGold(int min, int max, Inventory& inv) {
     int result = getRandomDie(min, max);
@@ -103,12 +70,6 @@ void rollADieForGold(int min, int max, Inventory& inv) {
     cout << "Your gold is " << result << endl;
 }    
 */
-int getRandomDie(int min, int max) {
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<int> dis(min, max);
-    return dis(gen);
-}
 
 private:
     int Gold = 1;

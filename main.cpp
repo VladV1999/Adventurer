@@ -198,7 +198,7 @@ int main() {
     }
     list<Adventurer>::iterator adventureritr;
     for (adventureritr = adventurerList.begin(); adventureritr != adventurerList.end(); adventureritr++) {
-        adventureritr->display();
+        adventureritr->Adventurer::display();
     }
     Inventory inventory;
     Inventory::Item sword("Sword");

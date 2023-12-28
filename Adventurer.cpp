@@ -2,9 +2,100 @@
 
 using namespace std;
 
+        int Adventurer::getDexterity() {
+            return this->Dexterity;
+        }
+
+        void Adventurer::setDexterity(int _Dexterity) {
+            this->Dexterity = _Dexterity;
+        }
+
+        void Adventurer::setStrength(int _Strength) {
+            this->Strength = _Strength;
+        }
+        
+
+        int Adventurer::getStrength() {
+            return this->Strength;
+        }
+
+        void Adventurer::setConstitution(int _Constitution) {
+            this->Constitution = _Constitution;
+        }
+
+        int Adventurer::getConstitution() {
+            return this->Constitution;
+        }
+
+        void Adventurer::setIntelligence(int _Intelligence) {
+            this->Intelligence = _Intelligence;
+        }
+
+        int Adventurer::getIntelligence() {
+            return this->Intelligence;
+        }
+
+        void Adventurer::setCharisma(int _Charisma) {
+            this->Charisma = _Charisma;
+        }
+
+        int Adventurer::getCharisma() {
+            return this->Charisma;
+        }
+        void Adventurer::setWisdom(int _Wisdom) {
+            this->Wisdom = _Wisdom;
+        }
+
+        void Adventurer::addToWisdom(int points) {
+            this->Wisdom += points;
+        }
+
+        void Adventurer::addToStrength(int points) {
+            this->Strength += points;
+        }
+
+        void Adventurer::addToIntelligence(int points) {
+            this->Intelligence += points;
+        }
+
+        void Adventurer::addToDexterity(int points) {
+            this->Dexterity += points;
+        }
+
+        void Adventurer::addToConstitution(int points) {
+            this->Constitution += points;
+        }
+
+        void Adventurer::addToCharisma(int points) {
+            this->Charisma += points;
+        }
+
+        int Adventurer::getWisdom() {
+            return this->Wisdom;
+        }
+
+        string Adventurer::getName() {
+            return this->Name;
+        }
+
+        void Adventurer::setName(string _Name) {
+            this->Name = _Name;
+        }
+
+        int Adventurer::getLevel() {
+            return this->Level;
+        }
+
+        int Adventurer::getRandomNumber(int min, int max) {
+            return -1;
+        }
+
+        void Adventurer::levelUp() {
+            this->Level=this->Level+1;
+        }
+
 Adventurer::Adventurer (string newname) {
 
-    //Inventory inventory;
         Name = newname;
         Dexterity = getRandomNumber(4, 6);
         Strength = getRandomNumber(4, 6);

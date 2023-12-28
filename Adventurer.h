@@ -38,98 +38,52 @@ enum class CharacterClass {
 class Adventurer {
     public:
         Adventurer(string newname);
-        int getDexterity() {
-            return this->Dexterity;
-        }
 
-        void setDexterity(int _Dexterity) {
-            this->Dexterity = _Dexterity;
-        }
+        int getDexterity();
 
-        void setStrength(int _Strength) {
-            this->Strength = _Strength;
-        }
+        void setDexterity(int _Dexterity) ;
+
+        void setStrength(int _Strength) ;
+
+        int getStrength();
+
+        void setConstitution(int _Constitution);
+
+        int getConstitution(); 
+
+        void setIntelligence(int _Intelligence);
+
+        int getIntelligence(); 
+
+        void setCharisma(int _Charisma);
+
+        int getCharisma();
+
+        void setWisdom(int _Wisdom); 
         
+        void addToWisdom(int points); 
 
-        int getStrength() {
-            return this->Strength;
-        }
+        void addToStrength(int points); 
 
-        void setConstitution(int _Constitution) {
-            this->Constitution = _Constitution;
-        }
+        void addToIntelligence(int points); 
 
-        int getConstitution() {
-            return this->Constitution;
-        }
+        void addToDexterity(int points); 
 
-        void setIntelligence(int _Intelligence) {
-            this->Intelligence = _Intelligence;
-        }
+        void addToConstitution(int points);
 
-        int getIntelligence() {
-            return this->Intelligence;
-        }
+        void addToCharisma(int points); 
 
-        void setCharisma(int _Charisma) {
-            this->Charisma = _Charisma;
-        }
+        int getWisdom(); 
 
-        int getCharisma() {
-            return this->Charisma;
-        }
-        void setWisdom(int _Wisdom) {
-            this->Wisdom = _Wisdom;
-        }
+        string getName(); 
 
-        
-        void addToWisdom(int points) {
-            this->Wisdom += points;
-        }
+        void setName(string _Name); 
 
-        void addToStrength(int points) {
-            this->Strength += points;
-        }
+        int getLevel(); 
 
-        void addToIntelligence(int points) {
-            this->Intelligence += points;
-        }
+        int getRandomNumber(int min, int max);
 
-        void addToDexterity(int points) {
-            this->Dexterity += points;
-        }
-
-        void addToConstitution(int points) {
-            this->Constitution += points;
-        }
-
-        void addToCharisma(int points) {
-            this->Charisma += points;
-        }
-
-        int getWisdom() {
-            return this->Wisdom;
-        }
-
-        string getName() {
-            return this->Name;
-        }
-
-        void setName(string _Name) {
-            this->Name = _Name;
-        }
-
-        int getLevel() {
-            return this->Level;
-        }
-
-        int getRandomNumber(int min, int max) {
-            return -1;
-        }
-
-        void levelUp() {
-            this->Level=this->Level+1;
-        }
+        void levelUp(); 
                     
         void display();
 
