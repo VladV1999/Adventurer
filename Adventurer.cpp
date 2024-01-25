@@ -1,4 +1,5 @@
 #include "Adventurer.h"
+#include "Inventory.h"
 
 using namespace std;
 
@@ -86,16 +87,31 @@ using namespace std;
             return this->Level;
         }
 
-        int Adventurer::getRandomNumber(int min, int max) {
-            return -1;
-        }
-
         void Adventurer::levelUp() {
             this->Level=this->Level+1;
         }
+        // //this entire method needs work but I want to do this with string enums, ask
+        // void Adventurer::populateInventory(CharacterClass characterclass) {
+        //     switch (characterclass)
+        //     {
+        //     case CharacterClass::Cleric:
+                
+        //         this->inventory.addItem(Item &newItem)
+        //         break;
+            
+        //     default:
+        //         break;
+        //     }
+        // }
+
+        int Adventurer::getRandomNumber(int min, int max) {
+        static random_device rd;
+        static mt19937 gen(rd());
+        uniform_int_distribution<int> distribution(min, max);
+        return distribution(gen);
+    }
 
 Adventurer::Adventurer (string newname) {
-
         Name = newname;
         Dexterity = getRandomNumber(4, 6);
         Strength = getRandomNumber(4, 6);
@@ -104,7 +120,6 @@ Adventurer::Adventurer (string newname) {
         Charisma = getRandomNumber(4, 6);
         Wisdom = getRandomNumber(4, 6);
         Level = 1;
-
 }
 
 void Adventurer::display() {
@@ -116,5 +131,9 @@ void Adventurer::display() {
     cout << "Charisma: " << this->getCharisma() << endl;
     cout << "Wisdom: " << this->getWisdom() << endl;
     cout << "Level " << this->getLevel() << endl;
+    this->inventory.display();
 }
 
+void Adventurer::replaceInventory(Inventory inv) {
+    inventory = inv;
+}

@@ -6,24 +6,16 @@
 #include <string>
 #include <vector>
 
+#include "Item.h"
+
 using namespace std;
 class Inventory {
 public:
     static const int Inventory_Size = 16;
 
-    class Item {
-        public:
-            string name;
-
-            Item(const string& itemName)
-              : name(itemName)
-              {
-              }
-    };
-
     Inventory();
 
-    bool addItem(Item* newItem);
+    bool addItem(Item &newItem);
 
         /*
         // Find the index of the next available slot
@@ -61,6 +53,10 @@ public:
 
     void setWeapon (string _Weapon);
 
+    string getclassItem();
+
+    void setClassItem(string _classItem);
+
 /*
 void rollADieForGold(int min, int max, Inventory& inv) {
     int result = getRandomDie(min, max);
@@ -73,9 +69,10 @@ void rollADieForGold(int min, int max, Inventory& inv) {
 
 private:
     int Gold = 1;
-    string Armor;
-    string Weapon;
-    vector <Item*> grid;
+    Item Armor;
+    Item Weapon;
+    vector<Item> grid;
+    Item classItem;
 };
 
 int getRandomDie(int min, int max);

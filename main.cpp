@@ -1,4 +1,3 @@
-/// instead of string inputs try to do string enums they will help you locate an error at compile time
 #include <iostream>
 #include <string>
 #include <random>
@@ -10,7 +9,7 @@
 #include <functional>
 #include <unordered_set>
 #include <vector>
-
+#include "Item.h"
 #include "Adventurer.h"
 #include "Inventory.h"
 
@@ -42,7 +41,6 @@ static const unordered_map<string, CharacterClass> characterClassMap = {
     {"Rogue", CharacterClass::Rogue},
     {"Invalid", CharacterClass::InvalidClass}
 };
-//whole thing in header
 template<typename EnumType>
 EnumType stringToEnum(const string& str, const unordered_map<string, EnumType>& lookupTable, const EnumType defaultValue) {
     const auto it = lookupTable.find(str);
@@ -64,13 +62,66 @@ CharacterClass classStringToEnum(const string& str) {
 }
 
 
-
+// @todo 
 Inventory generateInitialInventory(std::string theClass) {
     Inventory bagOfHolding;
     if (theClass == "Cleric") {
         bagOfHolding.setArmor("Light Chainmail");
         bagOfHolding.setWeapon("Morningstar and Light Shield");
+        bagOfHolding.setClassItem("Holy Sigil");
     }
+    else if (theClass == "Wizard") {
+        bagOfHolding.setArmor("Robes");
+        bagOfHolding.setWeapon("Quarterstaff");
+        bagOfHolding.setClassItem("Focus");
+    }
+    else if (theClass == "Artificier") {
+        bagOfHolding.setArmor("Leather Armor");
+        bagOfHolding.setWeapon("Hammer");
+        bagOfHolding.setClassItem("Tinker's Tools");
+    }    
+    else if (theClass == "Barbarian") {
+        bagOfHolding.setArmor("Hide Armor");
+        bagOfHolding.setWeapon("Battleaxe");
+    }    
+    else if (theClass == "Druid") {
+        bagOfHolding.setArmor("Bear Fur");
+        bagOfHolding.setWeapon("Club");
+    }    
+    else if (theClass == "Bard") {
+        bagOfHolding.setArmor("Light Armor");
+        bagOfHolding.setWeapon("Daggers");
+        bagOfHolding.setClassItem("Musical Instrument"); //make method to let user choose their instrument later on
+    }    
+    else if (theClass == "Rogue") {
+        bagOfHolding.setArmor("Leather Armor");
+        bagOfHolding.setWeapon("Daggers");
+    }    
+    else if (theClass == "Fighter") {
+        bagOfHolding.setArmor("Chain Mail");
+        bagOfHolding.setWeapon("Longsword");
+    }
+    else if (theClass == "Monk") {
+        bagOfHolding.setArmor("Robes");
+        bagOfHolding.setWeapon("Quarterstaff");
+    }
+    else if (theClass == "Paladin") {
+        bagOfHolding.setArmor("Half Plate Armor");
+        bagOfHolding.setWeapon("Longsword");
+    }
+    else if (theClass == "Ranger") {
+        bagOfHolding.setArmor("Leather Armor");
+        bagOfHolding.setWeapon("Longbow");
+    }
+    else if (theClass == "Sorcerer") {
+        bagOfHolding.setArmor("Robes");
+        bagOfHolding.setWeapon("Quarterstaff");
+    }
+    else if (theClass == "Warlock") {
+        bagOfHolding.setArmor("Robes");
+        bagOfHolding.setWeapon("Dagger"); //add a method that lets user choose specific weapon if they choose subclass of pact of the blade
+        bagOfHolding.setClassItem("To be determined for subclass"); // add a method that lets user choose class Item if they choose any subclass
+    }             
     else {
         cerr << "Invalid Class" << '\n';
     }
@@ -194,34 +245,35 @@ int main() {
                 cout << "Invalid input. Please enter \"(Y)es\" or \"(N)o\" " << endl;
             }
         }
+        string selectedClass = promptForClass();
+        Inventory inventory = generateInitialInventory(selectedClass);
+        advent.replaceInventory(inventory);
         adventurerList.push_back(advent);
     }
     list<Adventurer>::iterator adventureritr;
     for (adventureritr = adventurerList.begin(); adventureritr != adventurerList.end(); adventureritr++) {
         adventureritr->Adventurer::display();
     }
-    Inventory inventory;
-    Inventory::Item sword("Sword");
-    Inventory::Item shield("Shield");
-    Inventory::Item potion("Health Potion");
-    bool result = inventory.addItem(&sword);
-    result = inventory.addItem(&shield);
-    result = inventory.addItem(&potion);
+    // Inventory inventory;
+    // Inventory::Item sword("Sword");
+    // Inventory::Item shield("Shield");
+    // Inventory::Item potion("Health Potion");
+    // bool result = inventory.addItem(&sword);
+    // result = inventory.addItem(&shield);
+    // result = inventory.addItem(&potion);
 
-    if (!result) {
-        // the "too full output"
-    }
+    // if (!result) {
+    //     // the "too full output"
+    // }
 
-    inventory.display();
-    rollADieForGold(1, 4, inventory);
+    //inventory.display();
+    //rollADieForGold(1, 4, inventory);
     
     for (adventureritr = adventurerList.begin(); adventureritr != adventurerList.end(); adventureritr++) {
         adventureritr->display();
     }
 
     //--------------------------------------------------------------------------
-    std::string selectedClass = promptForClass();
-    Inventory startingInventory = generateInitialInventory(selectedClass);
     Adventurer me("A. Noob");
 
     return 0;

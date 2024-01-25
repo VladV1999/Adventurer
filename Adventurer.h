@@ -4,6 +4,7 @@
 #include <iostream>
 #include <random>
 #include <string>
+#include "Inventory.h"
 
 using std::string;
 using std::cout;
@@ -87,7 +88,12 @@ class Adventurer {
                     
         void display();
 
+        //void populateInventory(CharacterClass characterclass);
+
+        void replaceInventory(Inventory inv);
+
     private:
+        Inventory inventory;
         string Name;
         int Dexterity;
         int Strength;
