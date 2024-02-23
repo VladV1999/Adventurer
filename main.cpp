@@ -15,6 +15,8 @@
 
 using namespace std;
 
+string reusable(string prompt, string tryAgainPrompt, const unordered_set<string>& legalValues);
+
 static const unordered_map<string, Attribute> attributeMap = {
     {"Dexterity", Attribute::Dexterity},
     {"Strength", Attribute::Strength},
@@ -25,7 +27,7 @@ static const unordered_map<string, Attribute> attributeMap = {
     {"Invalid", Attribute::InvalidAttribute}
 };
 
-static const unordered_map<string, CharacterClass> characterClassMap = {
+static const unordered_map<string, CharacterClass> CHARACTER_CLASS_MAP = {
     {"Cleric", CharacterClass::Cleric},
     {"Artificier", CharacterClass::Artificier},
     {"Barbarian", CharacterClass::Barbarian},
@@ -41,6 +43,218 @@ static const unordered_map<string, CharacterClass> characterClassMap = {
     {"Rogue", CharacterClass::Rogue},
     {"Invalid", CharacterClass::InvalidClass}
 };
+
+/*
+ const unordered_set<string> CLASS_SET = {
+    "Cleric",
+    "Artificier",
+    "Barbarian",
+    "Bard",
+    "Druid",
+    "Fighter",
+    "Monk",
+    "Paladin",
+    "Ranger",
+    "Sorcerer",
+    "Warlock",
+    "Wizard",
+    "Rogue"
+};
+*/
+//This should be const But I will remove it for now
+//for the sake of program compiling
+const unordered_map<string, unordered_set<string>> SUBCLASS_MAPPINGS = {
+        {
+            "Rogue",
+            {
+                "Arcane Trickster",
+                "Thief",
+                "Assassin",
+                "Inquisitive",
+                "Phantom",
+                "Mastermind",
+                "Scout",
+                "Soulknife",
+                "Swashbuckler"
+            }
+        },
+        {
+            "Wizard", 
+            {
+                "Bladesinger",
+                "Chronurgy Magician",
+                "Graviturgy Magician",
+                "Order of Scribes",
+                "School of Abjuration",
+                "School of Conjuration",
+                "School of Divination",
+                "School of Enchantment",
+                "School of Evocation",
+                "School of Illusion",
+                "School of Necromancy",
+                "School of Transmutation",
+                "School of War Magic"
+            }
+        },
+        {
+            "Cleric",
+            {   
+                "Arcana Domain",
+                "Death Domain",
+                "Forge Domain",
+                "Grave Domain",
+                "Knowledge Domain",
+                "Life Domain",
+                "Light Domain",
+                "Nature Domain",
+                "Order Domain",
+                "Peace Domain",
+                "Tempest Domain",
+                "Trickery Domain",
+                "Twilight Domain",
+                "War Domain"
+            }
+        },
+        {
+            "Barbarian",
+            {
+                "Path of Ancestral Guardian",
+                "Path of the Battlerager",
+                "Path of the Beast",
+                "Path of the Berserker",
+                "Path of the Giant",
+                "Path of the Storm Herald",
+                "Path of the Totem Warrior",
+                "Path of the Zealot",
+                "Path of Wild Magic"
+            }
+        },
+        {
+            "Bard",
+            {
+                "College of Creation",
+                "College of Eloquence",
+                "College of Glamour",
+                "College of Lore",
+                "College of Spirits",
+                "College of Swords",
+                "College of Valor",
+                "College of Whispers"
+            }
+        },
+        {
+            "Artificier",
+            {
+                "Alchemist",
+                "Armorer",
+                "Artillerist",
+                "Battle Smith"
+            }
+        },
+        {
+            "Druid",
+            {
+                "Circle of Dreams",
+                "Circle of Spores",
+                "Circle of Stars",
+                "Circle of Wildfire",
+                "Circle of the Land",
+                "Circle of the Moon",
+                "Circle of the Shepherd"
+            }
+        },
+        {
+            "Fighter",
+            {
+                "Arcane Archer",
+                "Battle Master",
+                "Cavalier",
+                "Champion",
+                "Echo Knight",
+                "Eldritch Knight",
+                "Psi Warrior",
+                "Banneret",
+                "Rune Knight",
+                "Samurai"
+            }
+        },
+        {
+            "Monk",
+            {
+                "Way of Mercy",
+                "Way of Shadow",
+                "Way of The Ascendant Dragon",
+                "Way of the Astral Self",
+                "Way of the Drunken Master",
+                "Way of the Four Elements",
+                "Way of the Kensei",
+                "Way of the Long Death",
+                "Way of the Open Hand",
+                "Way of the Sun Soul"
+            }
+        },
+        {
+            "Paladin",
+            {
+                "Oath of Conquest",
+                "Oath of Devotion",
+                "Oath of Glory",
+                "Oath of Redemption",
+                "Oath of the Ancients",
+                "Oath of the Crown",
+                "Oath of the Watchers",
+                "Oath of Vengeance",
+                "Oathbreaker"
+            }
+        },
+        {
+            "Ranger",
+            {
+                "Beast Master",
+                "Drakewarden",
+                "Fey Wanderer",
+                "Gloom Stalker",
+                "Horizon Walker",
+                "Hunter",
+                "Monster Slayer",
+                "Swarmkeeper"
+            }
+        },
+        {
+            "Sorcerer",
+            {
+                "Abberant Mind",
+                "Clockwork Soul",
+                "Divine Soul",
+                "Draconic Bloodline",
+                "Lunar Sorcery",
+                "Shadow Magic",
+                "Storm Sorcery",
+                "Wild Magic"
+            }
+        },
+        {
+            "Warlock",
+            {
+                "The Archfey",
+                "The Celestial",
+                "The Fathomless",
+                "The Fiend",
+                "The Genie",
+                "The Great Old One",
+                "The Hexblade",
+                "The Undead",
+                "The Undying"
+            }
+        }
+};
+
+//----------------------------------------------------------------------------------------------------------------------
+
+//@todo
+//utilize this table
+//and ask about how I'm supposed to convert in in Adventurer
+//I want character Class to be a part of Adventurer
 template<typename EnumType>
 EnumType stringToEnum(const string& str, const unordered_map<string, EnumType>& lookupTable, const EnumType defaultValue) {
     const auto it = lookupTable.find(str);
@@ -58,101 +272,10 @@ Attribute attributeStringToEnum(const string& str) {
 }
 
 CharacterClass classStringToEnum(const string& str) {
-    return stringToEnum(str, characterClassMap, CharacterClass::InvalidClass);
+    return stringToEnum(str, CHARACTER_CLASS_MAP, CharacterClass::InvalidClass);
 }
-
-
-// @todo 
-Inventory generateInitialInventory(std::string theClass) {
-    Inventory bagOfHolding;
-    if (theClass == "Cleric") {
-        bagOfHolding.setArmor("Light Chainmail");
-        bagOfHolding.setWeapon("Morningstar and Light Shield");
-        bagOfHolding.setClassItem("Holy Sigil");
-    }
-    else if (theClass == "Wizard") {
-        bagOfHolding.setArmor("Robes");
-        bagOfHolding.setWeapon("Quarterstaff");
-        bagOfHolding.setClassItem("Focus");
-    }
-    else if (theClass == "Artificier") {
-        bagOfHolding.setArmor("Leather Armor");
-        bagOfHolding.setWeapon("Hammer");
-        bagOfHolding.setClassItem("Tinker's Tools");
-    }    
-    else if (theClass == "Barbarian") {
-        bagOfHolding.setArmor("Hide Armor");
-        bagOfHolding.setWeapon("Battleaxe");
-    }    
-    else if (theClass == "Druid") {
-        bagOfHolding.setArmor("Bear Fur");
-        bagOfHolding.setWeapon("Club");
-    }    
-    else if (theClass == "Bard") {
-        bagOfHolding.setArmor("Light Armor");
-        bagOfHolding.setWeapon("Daggers");
-        bagOfHolding.setClassItem("Musical Instrument"); //make method to let user choose their instrument later on
-    }    
-    else if (theClass == "Rogue") {
-        bagOfHolding.setArmor("Leather Armor");
-        bagOfHolding.setWeapon("Daggers");
-    }    
-    else if (theClass == "Fighter") {
-        bagOfHolding.setArmor("Chain Mail");
-        bagOfHolding.setWeapon("Longsword");
-    }
-    else if (theClass == "Monk") {
-        bagOfHolding.setArmor("Robes");
-        bagOfHolding.setWeapon("Quarterstaff");
-    }
-    else if (theClass == "Paladin") {
-        bagOfHolding.setArmor("Half Plate Armor");
-        bagOfHolding.setWeapon("Longsword");
-    }
-    else if (theClass == "Ranger") {
-        bagOfHolding.setArmor("Leather Armor");
-        bagOfHolding.setWeapon("Longbow");
-    }
-    else if (theClass == "Sorcerer") {
-        bagOfHolding.setArmor("Robes");
-        bagOfHolding.setWeapon("Quarterstaff");
-    }
-    else if (theClass == "Warlock") {
-        bagOfHolding.setArmor("Robes");
-        bagOfHolding.setWeapon("Dagger"); //add a method that lets user choose specific weapon if they choose subclass of pact of the blade
-        bagOfHolding.setClassItem("To be determined for subclass"); // add a method that lets user choose class Item if they choose any subclass
-    }             
-    else {
-        cerr << "Invalid Class" << '\n';
-    }
-
-    return bagOfHolding;
-}
-// After thinking about it, will this simply be a normal set?
-// Or perhaps a type of inventory (the generation of initial inventory is fine but I can't seem to get)
-// the set for it.
-// Is it even necessary?
-//  Inventory setInitialInventory() {
-
-//  }
 
 string promptForClass() {
-    unordered_set<string> classSet = {
-        "Cleric",
-        "Artificier",
-        "Barbarian",
-        "Bard",
-        "Druid",
-        "Fighter",
-        "Monk",
-        "Paladin",
-        "Ranger",
-        "Sorcerer",
-        "Warlock",
-        "Wizard",
-        "Rogue"
-    };
-
     string selectedClass;
     bool validChoice = false;
     Attribute Attribute = attributeStringToEnum(selectedClass); 
@@ -160,7 +283,7 @@ string promptForClass() {
         cout << "What class would you like to choose? " << endl;
         cin >> selectedClass;
 
-        if (classSet.find(selectedClass) != classSet.end()) {
+        if (CHARACTER_CLASS_MAP.find(selectedClass) != CHARACTER_CLASS_MAP.end()) {
             cout << "You have chosen " << selectedClass << endl;
             validChoice = true;
         }
@@ -170,6 +293,46 @@ string promptForClass() {
     }
 
     return selectedClass;
+};
+//check the SUBCLASS_MAPPING const error
+string promptForSubclass(const string theClass, int theLevel) {
+
+    if (SUBCLASS_MAPPINGS.find(theClass) == SUBCLASS_MAPPINGS.end()) {
+        return "Invalid Class";
+    }
+
+    if (theLevel < 3) {
+        return "Get back to \"The Grind\"";
+    }
+
+    const auto& subclassMap = SUBCLASS_MAPPINGS.find(theClass)->second;
+
+    string selectedSubclass = reusable(
+        "What subclass would you like to choose? ",
+        "Please choose a valid subclass ",
+        subclassMap
+    );
+    return selectedSubclass;
+}
+
+string reusable(string prompt, string tryAgainPrompt, const unordered_set<string>& legalValues) {
+    string selection;
+    bool validChoice = false;
+    //Attribute Attribute = attributeStringToEnum(selectedSubclass); 
+    while (!validChoice) {
+        cout << prompt << endl;
+        std::getline(std::cin, selection);
+
+        if (legalValues.find(selection) != legalValues.end()) {
+            cout << "You have chosen " << selection << endl;
+            validChoice = true;
+        }
+        else {
+            cout << tryAgainPrompt << endl;
+        }
+    }
+
+    return selection;
 }
 
 void performLevelUp(Adventurer& advent) {
@@ -221,6 +384,16 @@ void performLevelUp(Adventurer& advent) {
 };
 
 int main() {
+    // const CharacterClass desiredClass = classStringToEnum(promptForSubclass("Rogue", 3));
+
+    // cerr << selectedClass << '\n';
+    // cerr << desiredClass << '\n';
+
+    // Adventurer adv("John Smith");
+    // adv.setCharacterClass(desiredClass);
+
+
+    // Ignore everything below this line
     int numAdvent;
     list<Adventurer> adventurerList;
     cout << "How many adventurers would you like to create? " << endl;
@@ -245,32 +418,16 @@ int main() {
                 cout << "Invalid input. Please enter \"(Y)es\" or \"(N)o\" " << endl;
             }
         }
-        string selectedClass = promptForClass();
-        Inventory inventory = generateInitialInventory(selectedClass);
+        const string theClass = promptForClass();
+        Inventory inventory = generateInitialInventory(theClass);
+        // another function that uses theClass
         advent.replaceInventory(inventory);
         adventurerList.push_back(advent);
     }
     list<Adventurer>::iterator adventureritr;
     for (adventureritr = adventurerList.begin(); adventureritr != adventurerList.end(); adventureritr++) {
-        adventureritr->Adventurer::display();
-    }
-    // Inventory inventory;
-    // Inventory::Item sword("Sword");
-    // Inventory::Item shield("Shield");
-    // Inventory::Item potion("Health Potion");
-    // bool result = inventory.addItem(&sword);
-    // result = inventory.addItem(&shield);
-    // result = inventory.addItem(&potion);
-
-    // if (!result) {
-    //     // the "too full output"
-    // }
-
-    //inventory.display();
-    //rollADieForGold(1, 4, inventory);
-    
-    for (adventureritr = adventurerList.begin(); adventureritr != adventurerList.end(); adventureritr++) {
-        adventureritr->display();
+        //adventureritr->Adventurer::display();
+        cout << *adventureritr;
     }
 
     //--------------------------------------------------------------------------

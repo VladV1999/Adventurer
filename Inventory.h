@@ -37,7 +37,7 @@ public:
     ;
     
     // not really sure about making this const-- at one side it is const until added on the other this just feels wrong-- but the display ITSELF is constant
-    void display() const;
+    void display(ostream& outs) const;
 
     int getGold();
 
@@ -78,5 +78,8 @@ private:
 int getRandomDie(int min, int max);
 void rollADieForGold(int min, int max, Inventory& inv);
 
+ostream& operator<<(ostream& outs, const Inventory& inv);
+
+Inventory generateInitialInventory(std::string theClass);
 
 #endif

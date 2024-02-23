@@ -1,0 +1,32 @@
+@todo WEEK ONE (beginning of journal)
+create a prompt for class IN THE adventurer class itself
+make said prompt save user input into a property of the adventurer class (call it smth like advent class)
+add validation, so they can only pick specific classes 
+make sure that I have a getClass() method in the adventurer class (Completed)
+#optional
+Have the user pass in a boolean whether or not they want to actually get a subclass
+
+###########
+Show Main--
+Also show Adventurer CPP to  provide some details on constructor
+initialization of constructors-- need to ask how it works because
+I don't understand it fully visibly as I had problems in main()
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
+@TODO WEEK TWO (adding some functionality of ITEMS)
+Items need to have damage die and armor class if applicable
+Items need to have weight--will be default for now
+Items need to have a TYPE a type of ARMOR or a type of Weapon
+
+##############
+Show display of Adventurer--we changed it to const and that gave
+the discard qualifiers permissions error
+yet I changed everything to the standard default parameters within the constructor and everything was fine
+ask when I need to use the const_cast feature
+ask about const permissions of the unordered_map in main
+ask about forwarding promptForClass() to Item to determine base armor type without feats
+ask about saving all of this to the actual adventurer object in main
+ask about stuff in Item
+###ask about how to set in PRIVATE weapon types and armor types
+
+Item should be equippable or consumable as a CLASS 
+both should inherit from Item class

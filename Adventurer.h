@@ -5,6 +5,7 @@
 #include <random>
 #include <string>
 #include "Inventory.h"
+#include <unordered_set>
 
 using std::string;
 using std::cout;
@@ -39,6 +40,8 @@ enum class CharacterClass {
 class Adventurer {
     public:
         Adventurer(string newname);
+
+        Adventurer(string newname, const CharacterClass desiredClass);
 
         int getDexterity();
 
@@ -86,9 +89,13 @@ class Adventurer {
 
         void levelUp(); 
                     
-        void display();
+        void display(ostream& outs) const;
 
-        //void populateInventory(CharacterClass characterclass);
+        CharacterClass getCharacterClass();
+
+        void setCharacterClass(CharacterClass _charClass);
+
+        Adventurer promptForClass(const unordered_set<string>& CLASS_SET);
 
         void replaceInventory(Inventory inv);
 
@@ -102,7 +109,12 @@ class Adventurer {
         int Charisma;
         int Wisdom;
         int Level;
+        CharacterClass charClass;
 
 };
+
+ostream& operator<<(ostream& outs, const Adventurer adv);
+
+
 
 #endif

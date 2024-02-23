@@ -39,21 +39,20 @@ int getRandomDie(int min, int max)
     return dis(gen);
 }
 
-void Inventory::display() const
+void Inventory::display(ostream& outs) const
 {
     const int numItems = grid.size();
     const int emptySlots = Inventory_Size - numItems;
     for (int i = 0; i < grid.size(); i++)
     {
-        //I might want to add a const here, but permissive issues-- ask
         const Item &currentItem = grid[i];
 
-        cout <<currentItem.getName() << "\t";
+        outs <<currentItem.getName() << "\t";
     }
     for (int i = 0; i < emptySlots; ++i) {
-        cout << "Empty\t";
+        outs << "Empty\t";
     }
-    cout << endl;
+    outs << endl;
 }
 
 int Inventory::getGold()
@@ -103,4 +102,77 @@ void Inventory::setClassItem(string _classItem)
     this->classItem = _classItem;
     grid.push_back(Item (_classItem));
 
+}
+
+ostream& operator<<(ostream& outs, const Inventory& inv)
+{
+    inv.display(outs);
+
+    return outs;
+}
+
+Inventory generateInitialInventory(std::string theClass) {
+    Inventory bagOfHolding;
+    if (theClass == "Cleric") {
+        bagOfHolding.setArmor("Light Chainmail");
+        bagOfHolding.setWeapon("Morningstar and Light Shield");
+        bagOfHolding.setClassItem("Holy Sigil");
+    }
+    else if (theClass == "Wizard") {
+        bagOfHolding.setArmor("Robes");
+        bagOfHolding.setWeapon("Quarterstaff");
+        bagOfHolding.setClassItem("Focus");
+    }
+    else if (theClass == "Artificier") {
+        bagOfHolding.setArmor("Leather Armor");
+        bagOfHolding.setWeapon("Hammer");
+        bagOfHolding.setClassItem("Tinker's Tools");
+    }    
+    else if (theClass == "Barbarian") {
+        bagOfHolding.setArmor("Hide Armor");
+        bagOfHolding.setWeapon("Battleaxe");
+    }    
+    else if (theClass == "Druid") {
+        bagOfHolding.setArmor("Bear Fur");
+        bagOfHolding.setWeapon("Club");
+    }    
+    else if (theClass == "Bard") {
+        bagOfHolding.setArmor("Light Armor");
+        bagOfHolding.setWeapon("Daggers");
+        bagOfHolding.setClassItem("Musical Instrument"); //make method to let user choose their instrument later on
+    }    
+    else if (theClass == "Rogue") {
+        bagOfHolding.setArmor("Leather Armor");
+        bagOfHolding.setWeapon("Daggers");
+    }    
+    else if (theClass == "Fighter") {
+        bagOfHolding.setArmor("Chain Mail");
+        bagOfHolding.setWeapon("Longsword");
+    }
+    else if (theClass == "Monk") {
+        bagOfHolding.setArmor("Robes");
+        bagOfHolding.setWeapon("Quarterstaff");
+    }
+    else if (theClass == "Paladin") {
+        bagOfHolding.setArmor("Half Plate Armor");
+        bagOfHolding.setWeapon("Longsword");
+    }
+    else if (theClass == "Ranger") {
+        bagOfHolding.setArmor("Leather Armor");
+        bagOfHolding.setWeapon("Longbow");
+    }
+    else if (theClass == "Sorcerer") {
+        bagOfHolding.setArmor("Robes");
+        bagOfHolding.setWeapon("Quarterstaff");
+    }
+    else if (theClass == "Warlock") {
+        bagOfHolding.setArmor("Robes");
+        bagOfHolding.setWeapon("Dagger"); //add a method that lets user choose specific weapon if they choose subclass of pact of the blade
+        bagOfHolding.setClassItem("To be determined for subclass"); // add a method that lets user choose class Item if they choose any subclass
+    }             
+    else {
+        cerr << "Invalid Class" << '\n';
+    }
+
+    return bagOfHolding;
 }
