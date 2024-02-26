@@ -1,0 +1,5 @@
+When I did the allocation of memory for armorTypeDeterminant combined
+with generateInitialInventory -- the memory was allocated!!!
+I just needed to get it since the memory was allocated
+Lesson was -- don't be afraid to use gets too ^^
+back to the basics

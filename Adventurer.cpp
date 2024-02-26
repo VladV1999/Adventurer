@@ -1,5 +1,6 @@
 #include "Adventurer.h"
 #include "Inventory.h"
+#include "equippableItem.h"
 
 using namespace std;
 

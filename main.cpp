@@ -10,6 +10,7 @@
 #include <unordered_set>
 #include <vector>
 #include "Item.h"
+#include "equippableItem.h"
 #include "Adventurer.h"
 #include "Inventory.h"
 
@@ -61,8 +62,7 @@ static const unordered_map<string, CharacterClass> CHARACTER_CLASS_MAP = {
     "Rogue"
 };
 */
-//This should be const But I will remove it for now
-//for the sake of program compiling
+
 const unordered_map<string, unordered_set<string>> SUBCLASS_MAPPINGS = {
         {
             "Rogue",
@@ -385,14 +385,6 @@ void performLevelUp(Adventurer& advent) {
 
 int main() {
     // const CharacterClass desiredClass = classStringToEnum(promptForSubclass("Rogue", 3));
-
-    // cerr << selectedClass << '\n';
-    // cerr << desiredClass << '\n';
-
-    // Adventurer adv("John Smith");
-    // adv.setCharacterClass(desiredClass);
-
-
     // Ignore everything below this line
     int numAdvent;
     list<Adventurer> adventurerList;
@@ -414,13 +406,13 @@ int main() {
                 cout << "Your current level is " << advent.getLevel() << endl;
             } else if (levelUpInput == "no" || levelUpInput == "n"){
                 break;
+                // I want to put promptForSubclass() here;
             } else {
                 cout << "Invalid input. Please enter \"(Y)es\" or \"(N)o\" " << endl;
             }
         }
         const string theClass = promptForClass();
         Inventory inventory = generateInitialInventory(theClass);
-        // another function that uses theClass
         advent.replaceInventory(inventory);
         adventurerList.push_back(advent);
     }

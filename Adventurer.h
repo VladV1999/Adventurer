@@ -1,3 +1,4 @@
+#pragma once
 #ifndef ADVENTURER_H_INCLUDED
 #define ADVENTURER_H_INCLUDED
 

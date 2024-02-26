@@ -1,6 +1,9 @@
 #include "equippableItem.h"
 using namespace std;
 
+string EquippableItem::weaponType;
+string EquippableItem::armorType;
+
 string EquippableItem::getArmorType () {
     return this->armorType;
 }
@@ -16,8 +19,8 @@ string EquippableItem::getWeaponType () {
 void EquippableItem::setWeaponType (string _weaponType) {
     this->weaponType = _weaponType;
 }
-
-void EquippableItem::armorTypeDeterminant (string _playerClass) {
+//couldn't find proper syntax on how to make this static without getting errors need help 
+EquippableItem EquippableItem::armorTypeDeterminant (string _playerClass) {
 
     unordered_map<string, string> classToArmorMapping = {
         {"Cleric", "Heavy"},
@@ -35,25 +38,38 @@ void EquippableItem::armorTypeDeterminant (string _playerClass) {
         {"Rogue", "Medium"}
     };
 
+    EquippableItem item;
+    const auto& armorGetterItr = classToArmorMapping.find(_playerClass);
     if (classToArmorMapping.find(_playerClass) == classToArmorMapping.end()) {
-        armorType = "None";
-        return;
+       item.setArmorType("None");
+    } else {
+    item.setArmorType(armorGetterItr->second);
     }
-    armorType = classToArmorMapping[_playerClass];
-
+    return item;
 }
+
+// void EquippableItem::armorTypeArmorClassDeterminant(const string _armorType) {
+//     unordered_map<string, pair<unordered_map<string, string>, int>> ArmorClassMap = {
+//         {""}
+//     }
+// }
 
 void EquippableItem::weaponTypeDeterminant (string _playerClass) {
     unordered_map<string, string> classToWeaponMap = {
         {"Cleric", "All"},
         {"Barbarian", "All"},
-        {"Bard", "Martial Ranged, Simple, Finesse"},
+        {"Bard", "Martial Ranged, Simple, and Finesse"
+            // "Bard",
+            // (
+            //      "Martial Ranged," + "Simple, " + "Finesse"
+            // )
+        },
         {"Druid", "All"},
         {"Fighter", "All"},
         {"Monk", "Simple"},
         {"Paladin", "All"},
         {"Ranger", "All"},
-        {"Rogue", "Martial Ranged, Simple, and Finesse"}
+        {"Rogue", "Martial Ranged, Simple, and Finesse"},
         {"Sorcerer", "Simple"},
         {"Warlock", "Simple"},
         {"Wizard", "Simple"}

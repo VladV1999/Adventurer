@@ -30,3 +30,9 @@ ask about stuff in Item
 
 Item should be equippable or consumable as a CLASS 
 both should inherit from Item class
+------------------------------------------------------------------------------
+Ask about dependency injection in main about replaceInventory; -- made but not assigned to any adventurer class
+Ask about next line/ getline for map in weaponTypeDeterminant()--string concatenation
+I set the member variables to static and changed some logic in armorTypeDeterminant-- ask about it
+and ask about integrating said methods into main
+ask about promptForSubclass to let the user choose class instead of hard giving it to main

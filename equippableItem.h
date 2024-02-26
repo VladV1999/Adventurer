@@ -7,6 +7,7 @@
 #include "Item.h"
 #include "Inventory.h"
 #include <unordered_map>
+#include <utility>
 
 using namespace std;
 
@@ -20,7 +21,7 @@ public:
 
     string getArmorType();
 
-    void armorTypeDeterminant (string _playerClass);
+    static EquippableItem armorTypeDeterminant (string _playerClass);
 
     void weaponTypeDeterminant (string _playerClass);
 
@@ -28,10 +29,12 @@ public:
 
     void setWeaponType(string _weaponType);
 
+    // void armorTypeArmorClassDeterminant();
+
 private: 
-    string weaponType;
-    string armorType;
-    static CharacterClass (*classStringToEnumPtr)(const string&);
+    static string weaponType;
+    static string armorType;
+    CharacterClass (*classStringToEnumPtr)(const string&);
 };
 
 #endif

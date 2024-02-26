@@ -5,6 +5,7 @@
 #include <random>
 #include <string>
 #include <vector>
+#include "equippableItem.h"
 
 #include "Item.h"
 
@@ -47,7 +48,7 @@ public:
 
     string getArmor();
 
-    void setArmor (string _Armor);
+    void setArmor (const Item& Armor);
 
     string getWeapon();
 
