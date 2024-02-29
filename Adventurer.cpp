@@ -62,6 +62,7 @@ Adventurer::Adventurer(string newname, const CharacterClass desiredClass)
     int Adventurer::getCharisma() {
         return this->Charisma;
     }
+    
     void Adventurer::setWisdom(int _Wisdom) {
         this->Wisdom = _Wisdom;
     }

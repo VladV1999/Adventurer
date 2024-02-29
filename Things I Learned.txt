@@ -3,3 +3,20 @@ with generateInitialInventory -- the memory was allocated!!!
 I just needed to get it since the memory was allocated
 Lesson was -- don't be afraid to use gets too ^^
 back to the basics
+
+
+Raw string literals for when you don't want to concatenate should be used in format of
+R"(blah blah blah)"
+
+Alternatively string concatenation must be explicitly stated out
+
+if you want to span code over multiple lines-- do it like so in maps at least
+
+unordered_map<string, string>anyMap = {
+    {"Bard",
+    string("Hello") +
+    string("Greetings") +
+    string("Blah blah blah")}
+}
+
+That would be considered a valid entry

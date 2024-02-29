@@ -36,3 +36,9 @@ Ask about next line/ getline for map in weaponTypeDeterminant()--string concaten
 I set the member variables to static and changed some logic in armorTypeDeterminant-- ask about it
 and ask about integrating said methods into main
 ask about promptForSubclass to let the user choose class instead of hard giving it to main
+
+
+-----------------------------------------------------------------------------------------------------
+Create a dice roll class-
+Specficy sides of die as a data member variable,
+specify roll numbers
