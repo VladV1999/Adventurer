@@ -7,12 +7,12 @@ using namespace std;
 Adventurer::Adventurer (string newname) {
     // charClass = "Cleric";
     Name = newname;
-    Dexterity = getRandomNumber(4, 6);
-    Strength = getRandomNumber(4, 6);
-    Constitution = getRandomNumber(4, 6);
-    Intelligence = getRandomNumber(4, 6);
-    Charisma = getRandomNumber(4, 6);
-    Wisdom = getRandomNumber(4, 6);
+    Dexterity = getRandomNumber(4, 8);
+    Strength = getRandomNumber(4, 8);
+    Constitution = getRandomNumber(4, 8);
+    Intelligence = getRandomNumber(4, 8);
+    Charisma = getRandomNumber(4, 8);
+    Wisdom = getRandomNumber(4, 8);
     Level = 1;
 }
 

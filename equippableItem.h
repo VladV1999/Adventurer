@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include <utility>
 #include <functional>
+#include "DiceRoll.h"
 
 using namespace std;
 
@@ -47,8 +48,9 @@ private:
     string weaponType;
     string armorType;
     int armorClass;
-    uniform_int_distribution<int> damageDie;
+    function<void(int, int, int)> damageDie;
     CharacterClass (*classStringToEnumPtr)(const string&);
+    DiceRoll diceRollInstance;
 };
 
 int RNG(int min, int max);

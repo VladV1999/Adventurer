@@ -42,3 +42,11 @@ ask about promptForSubclass to let the user choose class instead of hard giving 
 Create a dice roll class-
 Specficy sides of die as a data member variable,
 specify roll numbers
+
+For the dice roll class:
+Could go with the bag of holding way in inventory and then do a dependency injection
+Could also possibly map every entry of weapon and set it's designated damage with gets and sets
+then save that result.
+
+---------------------------------------------------------------------------------------------------------------------------------
+CODE IN POINT BUY -- 27 STAT POINTS
