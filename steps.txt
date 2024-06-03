@@ -49,4 +49,25 @@ Could also possibly map every entry of weapon and set it's designated damage wit
 then save that result.
 
 ---------------------------------------------------------------------------------------------------------------------------------
-CODE IN POINT BUY -- 27 STAT POINTS
+CODE IN POINT BUY -- 27 STAT POINTS potentially for actual game--
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Things to code:
+
+Profiency
+Cantrips and Spells for casters
+Attributes and extra abilities for non-casters
+Feats
+
+
+
+
+//////
+
+potentially make a map that pairs cantrips as the key to any class that can access it being the value
+------------------------------------------------------------------------------------------------------------------------------------------------
+make a parser class that would take in a file
+the said class will parse the strings in such a way that
+it would provide an unordered map of a string of a key
+and then an unordered set of type string as values

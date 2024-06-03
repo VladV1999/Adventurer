@@ -2,6 +2,13 @@
 
 using namespace std;
 
+DiceRoll* DiceRoll::theInstance = nullptr;
+
+DiceRoll::DiceRoll() {
+    this->numberOfRolls = 1;
+    this->sidesOfDie = 6;
+}
+
 int DiceRoll::getNumberOfRolls () {
     return this->numberOfRolls;
 }
@@ -31,4 +38,13 @@ void DiceRoll::rollDamageDie (int diceRolls, int min, int max) {
     for (int i=0;i<diceRolls; ++i) {
         damage += distributionMaker(min, max);
     }
+}
+
+DiceRoll& DiceRoll::getInstance()
+{
+    if (DiceRoll::theInstance == nullptr) {
+        DiceRoll::theInstance = new DiceRoll();
+    }
+
+    return *(DiceRoll::theInstance);
 }

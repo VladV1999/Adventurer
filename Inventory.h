@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include "equippableItem.h"
+#include <unordered_map>
 
 #include "Item.h"
 
@@ -15,6 +16,7 @@ public:
     static const int Inventory_Size = 16;
 
     Inventory();
+    Inventory(const Item& _armor, string _weapon, string _classItem);
 
     bool addItem(Item &newItem);
 

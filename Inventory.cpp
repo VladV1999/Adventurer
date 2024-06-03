@@ -6,6 +6,14 @@ using namespace std;
 
 Inventory::Inventory() : grid(){}
 
+Inventory::Inventory(const Item& _armor, string _weapon, string _classItem)
+    :Inventory()
+{
+    this->setArmor(_armor);
+    this->setWeapon(_weapon);
+    this->setClassItem(_classItem);
+}
+
 bool Inventory::addItem(Item &newItem)
 {
     if (grid.size() < grid.capacity())
@@ -133,6 +141,36 @@ ostream& operator<<(ostream& outs, const Inventory& inv)
 }
 // Ask why getArmorType is necessary here???
 Inventory generateInitialInventory(std::string theClass) {
+    /*
+    auto& clericBag = []() -> Inventory {
+        Inventory bagOfHolding;
+
+        bagOfHolding.setArmor(EquippableItem::armorTypeDeterminant("Cleric").getArmorType());
+        bagOfHolding.setWeapon("Morningstar and Light Shield");
+        bagOfHolding.setClassItem("Holy Sigil");
+
+        return bagOfHolding;
+    }
+    */
+
+    /*
+    if (theClass == "Cleric") {
+        return clericBag();
+    }
+    */
+    const std::unordered_map<std::string, std::function<Inventory()>> invBuilders = {
+        {
+            "Cleric",
+            []() -> Inventory {
+                return Inventory(
+                    EquippableItem::armorTypeDeterminant("Cleric").getArmorType(),
+                    "Morningstar and Light Shield",
+                    "Holy Sigil"
+                );
+            }
+        }
+    };
+
     Inventory bagOfHolding;
     if (theClass == "Cleric") {
         bagOfHolding.setArmor(EquippableItem::armorTypeDeterminant("Cleric").getArmorType());

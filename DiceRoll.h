@@ -22,7 +22,11 @@ class DiceRoll {
 
         int distributionMaker (int min, int max);
 
+        static DiceRoll& getInstance();
+
     private:
         int sidesOfDie;
         int numberOfRolls;
+        static DiceRoll* theInstance;
+        DiceRoll();
 };

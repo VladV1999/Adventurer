@@ -5,7 +5,6 @@
 using namespace std;
 
 Adventurer::Adventurer (string newname) {
-    // charClass = "Cleric";
     Name = newname;
     Dexterity = getRandomNumber(4, 8);
     Strength = getRandomNumber(4, 8);

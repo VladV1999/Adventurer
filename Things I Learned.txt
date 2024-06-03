@@ -20,3 +20,6 @@ unordered_map<string, string>anyMap = {
 }
 
 That would be considered a valid entry
+
+
+Constructors have an implicit return type

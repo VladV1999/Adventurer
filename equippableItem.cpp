@@ -16,7 +16,7 @@ string EquippableItem::getWeaponType () {
 void EquippableItem::setWeaponType (string _weaponType) {
     this->weaponType = _weaponType;
 }
-//couldn't find proper syntax on how to make this static without getting errors need help 
+
 EquippableItem EquippableItem::armorTypeDeterminant (string _playerClass) {
 
     unordered_map<string, string> classToArmorMapping = {
@@ -132,47 +132,49 @@ uniform_int_distribution<int> roll1d6() {
 
 //  uniform_int_distribution<int>,
 
+
+
 EquippableItem EquippableItem::weaponDamageGenerator(pair <string, string> _weaponTypeAndName) {
     unordered_map<pair<string, string>, function<void(int, int, int)>, hash_Pair> weaponDamageMap = {
-    {{"Simple", "Club"}, [this](int diceRolls, int min, int max) { diceRollInstance.rollDamageDie(1, 1, 4); }},
-    {{"Simple", "Dagger"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 4); }},
-    {{"Simple", "Greatclub"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 8); }},
-    {{"Simple", "Handaxe"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 6); }},
-    {{"Simple", "Javelin"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 6); }},
-    {{"Simple", "Light Hammer"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 4); }},
-    {{"Simple", "Mace"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 6); }},
-    {{"Simple", "Quarterstaff"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 6); }},
-    {{"Simple", "Sickle"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 4); }},
-    {{"Simple", "Spear"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 6); }},
+    {{"Simple", "Club"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 4); }},
+    {{"Simple", "Dagger"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 4); }},
+    {{"Simple", "Greatclub"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 8); }},
+    {{"Simple", "Handaxe"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 6); }},
+    {{"Simple", "Javelin"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 6); }},
+    {{"Simple", "Light Hammer"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 4); }},
+    {{"Simple", "Mace"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 6); }},
+    {{"Simple", "Quarterstaff"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 6); }},
+    {{"Simple", "Sickle"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 4); }},
+    {{"Simple", "Spear"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 6); }},
 
-    {{"Simple Ranged", "Light Crossbow"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 8); }},
-    {{"Simple Ranged", "Dart"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 4); }},
-    {{"Simple Ranged", "Shortbow"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 6); }},
-    {{"Simple Ranged", "Sling"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 4); }},
+    {{"Simple Ranged", "Light Crossbow"}, [](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 8); }},
+    {{"Simple Ranged", "Dart"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 4); }},
+    {{"Simple Ranged", "Shortbow"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 6); }},
+    {{"Simple Ranged", "Sling"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 4); }},
 
-    {{"Martial Melee", "Battleaxe"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 8); }},
-    {{"Martial Melee", "Flail"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 8); }},
-    {{"Martial Melee", "Glaive"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 10); }},
-    {{"Martial Melee", "Greatsword"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(2, 1, 6); }},
-    {{"Martial Melee", "Halberd"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 10); }},
-    {{"Martial Melee", "Lance"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 12); }},
-    {{"Martial Melee", "Longsword"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 8); }},
-    {{"Martial Melee", "Maul"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(2, 1, 6); }},
-    {{"Martial Melee", "Morningstar"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 8); }},
-    {{"Martial Melee", "Pike"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 10); }},
-    {{"Martial Melee", "Rapier"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 8); }},
-    {{"Martial Melee", "Scimitar"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 6); }},
-    {{"Martial Melee", "Shortsword"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 6); }},
-    {{"Martial Melee", "Trident"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 6); }},
-    {{"Martial Melee", "War pick"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 8); }},
-    {{"Martial Melee", "Warhammer"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 8); }},
-    {{"Martial Melee", "Whip"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 4); }},
-    {{"Martial Melee", "Greataxe"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 12); }},
+    {{"Martial Melee", "Battleaxe"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 8); }},
+    {{"Martial Melee", "Flail"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 8); }},
+    {{"Martial Melee", "Glaive"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 10); }},
+    {{"Martial Melee", "Greatsword"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(2, 1, 6); }},
+    {{"Martial Melee", "Halberd"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 10); }},
+    {{"Martial Melee", "Lance"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 12); }},
+    {{"Martial Melee", "Longsword"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 8); }},
+    {{"Martial Melee", "Maul"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(2, 1, 6); }},
+    {{"Martial Melee", "Morningstar"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 8); }},
+    {{"Martial Melee", "Pike"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 10); }},
+    {{"Martial Melee", "Rapier"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 8); }},
+    {{"Martial Melee", "Scimitar"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 6); }},
+    {{"Martial Melee", "Shortsword"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 6); }},
+    {{"Martial Melee", "Trident"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 6); }},
+    {{"Martial Melee", "War pick"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 8); }},
+    {{"Martial Melee", "Warhammer"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 8); }},
+    {{"Martial Melee", "Whip"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 4); }},
+    {{"Martial Melee", "Greataxe"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 12); }},
     
-    {{"Martial Ranged", "Blowgun"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 1); }},
-    {{"Martial Ranged", "Hand Crossbow"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 6); }},
-    {{"Martial Ranged", "Heavy Crossbow"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 10); }},
-    {{"Martial Ranged", "Longbow"}, [this](int diceRolls, int min, int max) {diceRollInstance.rollDamageDie(1, 1, 8); }}
+    {{"Martial Ranged", "Blowgun"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 1); }},
+    {{"Martial Ranged", "Hand Crossbow"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 6); }},
+    {{"Martial Ranged", "Heavy Crossbow"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 10); }},
+    {{"Martial Ranged", "Longbow"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 8); }}
     };
     if (weaponDamageMap.find(_weaponTypeAndName) == weaponDamageMap.end()) {
         cout << "No weapon entry found " << "\n";

@@ -28,6 +28,8 @@ class EquippableItem : public Item {
 
 public:
 
+    EquippableItem() = default;
+
     string getWeaponType();
 
     string getArmorType();
@@ -50,7 +52,7 @@ private:
     int armorClass;
     function<void(int, int, int)> damageDie;
     CharacterClass (*classStringToEnumPtr)(const string&);
-    DiceRoll diceRollInstance;
+    DiceRoll* diceRollInstance;
 };
 
 int RNG(int min, int max);
