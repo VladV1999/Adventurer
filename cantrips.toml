@@ -1,26 +1,214 @@
-Artificier    
-    Acid Splash
-    Booming Blade
-    Create Bonfire
-    Dancing Lights
-    Fire Bolt
-    Frostbite
-    Green-Flamde Blade
-    Guidance
-    Light
-    Lightning Lure
-    Mage Hand
-    Magic Stone
-    Mending
-    Message
-    Poison Spray
-    Prestidigitation
-    Ray of Frost
-    Resistance
-    Shocking Grasp
-    Spare the Dying
-    Sword Burst
-    Thorn Whip
-    Thunderclap
+[Artificier]
+cantrips = [
+    "Acid Splash",
+    "Booming Blade",
+    "Create Bonfire",
+    "Dancing Lights",
+    "Fire Bolt",
+    "Frostbite",
+    "Green-Flamde Blade",
+    "Guidance",
+    "Light",
+    "Lightning Lure",
+    "Mage Hand",
+    "Magic Stone",
+    "Mending",
+    "Message",
+    "Poison Spray",
+    "Prestidigitation",
+    "Ray of Frost",
+    "Resistance",
+    "Shocking Grasp",
+    "Spare the Dying",
+    "Sword Burst",
+    "Thorn Whip",
+    "Thunderclap"
+]
 
-Sorcerer
+[Sorcerer]
+cantrips = [
+    "Acid Splash",
+    "Blade Ward",
+    "Booming Blade",
+    "Chill Touch",
+    "Control Flames",
+    "Create Bonfire",
+    "Dancing Lights",
+    "Fire Bolt",
+    "Friends",
+    "Frostbite",
+    "Green-Flame-Blade",
+    "Gust",
+    "Infestation",
+    "Light",
+    "Lightning Lure",
+    "Mage Hand",
+    "Mending",
+    "Message",
+    "Mind Sliver",
+    "Minor Illusion",
+    "Mold Earth",
+    "Poison Spray",
+    "Prestidigitation",
+    "Ray of Frost",
+    "Shape Water",
+    "Shocking Grasp",
+    "Sword Burst",
+    "Thunderclap",
+    "True Strike"
+]
+
+[Cleric]
+cantrips = [
+    "Decompose",
+    "Guidance",
+    "Light",
+    "Mending",
+    "Resistance",
+    "Sacred Flame",
+    "Spare the Dying",
+    "Thaumaturgy",
+    "Toll the Dead",
+    "Word of Radiance"
+]
+
+[Bard]
+cantrips = [
+    "Blade Ward",
+    "Dancing Lights",
+    "Friends",
+    "Light",
+    "Mage Hand",
+    "Mending",
+    "Message",
+    "Minor Illusion",
+    "Prestidigitation",
+    "Thunderclap",
+    "True Strike",
+    "Vicious Mockery"
+]
+
+[Druid]
+cantrips = [
+    "Control Flames",
+    "Create Bonfire",
+    "Druidcraft",
+    "Frostbite",
+    "Guidance",
+    "Gust",
+    "Infestation",
+    "Magic Stone",
+    "Mending",
+    "Mold Earth",
+    "Poison Spray",
+    "Primal Savagery",
+    "Produce Flame",
+    "Resistance",
+    "Shape Water",
+    "Shilellagh",
+    "Thorn Whip",
+    "Thunderclap"
+]
+
+[Paladin]
+cantrips = [
+    "Bless",
+    "Ceremony",
+    "Command",
+    "Compelled Duel",
+    "Cure Wounds",
+    "Detect Evil and Good",
+    "Detect Magic",
+    "Detect Poison and Disease",
+    "Divine Favor",
+    "Heroism",
+    "Protection from Evil and Good",
+    "Purify Food and Drink",
+    "Searing Smite",
+    "Shield of Faith",
+    "Thunderous Smite",
+    "Wrathful Smite"
+]
+
+[Ranger]
+cantrips = [
+    "Absorb Elements",
+    "Alarm",
+    "Animal Friendship",
+    "Beast Bond",
+    "Cure Wounds",
+    "Detect Magic",
+    "Detect Poison and Disease",
+    "Ensnaring Strike",
+    "Entangle",
+    "Fog Cloud",
+    "Goodberry",
+    "Hail of Thorns",
+    "Hunter's Mark",
+    "Jump",
+    "Longstrider",
+    "Searing Smite",
+    "Snare",
+    "Speak with Animals",
+    "Zephyr Strike"
+]
+
+[Warlock]
+cantrips = [
+    "Blade Ward",
+    "Booming Blade",
+    "Chill Touch",
+    "Create Bonfire",
+    "Eldritch Blast",
+    "Friends",
+    "Frostbite",
+    "Green-Flame-Blade",
+    "Infestation",
+    "Lightning Lure",
+    "Mage Hand",
+    "Magic Stone",
+    "Mind Sliver",
+    "Minor Illusion",
+    "Poison Spray",
+    "Prestidigitation",
+    "Sword Burst",
+    "Thunderclap",
+    "Toll the Dead",
+    "True Strike"
+]
+
+[Wizard]
+cantrips = [
+    "Acid Splash",
+    "Blade Ward",
+    "Booming Blade",
+    "Chill Touch",
+    "Control Flames",
+    "Create Bonfire",
+    "Dancing Lights",
+    "Encode Thoughts",
+    "Fire Bolt",
+    "Friends",
+    "Frostbite",
+    "Green-Flame-Blade",
+    "Gust",
+    "Infestation",
+    "Light",
+    "Lightning Lure",
+    "Mage Hand",
+    "Mending",
+    "Message",
+    "Mind Sliver",
+    "Minor Illusion",
+    "Mold Earth",
+    "Poison Spray",
+    "Prestidigitation",
+    "Ray of Frost",
+    "Sapping Sting",
+    "Shape Water",
+    "Shocking Grasp",
+    "Sword Burst",
+    "Thunderclap",
+    "Toll the Dead",
+    "True Strike"
+]
