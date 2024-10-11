@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <random>
 #include <list>
@@ -44,24 +45,6 @@ static const unordered_map<string, CharacterClass> CHARACTER_CLASS_MAP = {
     {"Rogue", CharacterClass::Rogue},
     {"Invalid", CharacterClass::InvalidClass}
 };
-
-/*
- const unordered_set<string> CLASS_SET = {
-    "Cleric",
-    "Artificier",
-    "Barbarian",
-    "Bard",
-    "Druid",
-    "Fighter",
-    "Monk",
-    "Paladin",
-    "Ranger",
-    "Sorcerer",
-    "Warlock",
-    "Wizard",
-    "Rogue"
-};
-*/
 
 const unordered_map<string, unordered_set<string>> SUBCLASS_MAPPINGS = {
         {
@@ -426,4 +409,4 @@ int main() {
     Adventurer me("A. Noob");
 
     return 0;
-};
+}
