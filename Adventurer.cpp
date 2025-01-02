@@ -130,7 +130,7 @@ Adventurer::Adventurer(string newname, const CharacterClass desiredClass)
     //     cout << " " << endl;
     //     return Adventurer(string hi);
     // }
-
+    // @todo remove the unnecessary RNG and move them to a RNG file
     int Adventurer::getRandomNumber(int min, int max) {
     static random_device rd;
     static mt19937 gen(rd());

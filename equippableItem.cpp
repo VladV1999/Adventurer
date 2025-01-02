@@ -16,7 +16,7 @@ string EquippableItem::getWeaponType () {
 void EquippableItem::setWeaponType (string _weaponType) {
     this->weaponType = _weaponType;
 }
-
+// @todo feed map through a text
 EquippableItem EquippableItem::armorTypeDeterminant (string _playerClass) {
 
     unordered_map<string, string> classToArmorMapping = {
@@ -44,7 +44,7 @@ EquippableItem EquippableItem::armorTypeDeterminant (string _playerClass) {
     }
     return item;
 }
-
+// @todo feed the map through a text file 
 EquippableItem EquippableItem::armorTypeArmorClassDeterminant(pair<string, string> _armorTypeAndName) {
     unordered_map<pair<string, string>, int, hash_Pair> armorClassMap = {
         {{"Light", "Padded Armor"}, 11},
@@ -71,7 +71,7 @@ EquippableItem EquippableItem::armorTypeArmorClassDeterminant(pair<string, strin
     }
     return item;
 };
-
+// @todo if NEEDED, feed the map through text
 EquippableItem EquippableItem::weaponTypeDeterminant (string _playerClass) {
     unordered_map<string, string> classToWeaponMap = {
         {"Cleric", "All"},
@@ -133,7 +133,7 @@ uniform_int_distribution<int> roll1d6() {
 //  uniform_int_distribution<int>,
 
 
-
+// @todo refactor initialization to read strings and integers from file
 EquippableItem EquippableItem::weaponDamageGenerator(pair <string, string> _weaponTypeAndName) {
     unordered_map<pair<string, string>, function<void(int, int, int)>, hash_Pair> weaponDamageMap = {
     {{"Simple", "Club"}, [this](int diceRolls, int min, int max) {DiceRoll::getInstance().rollDamageDie(1, 1, 4); }},

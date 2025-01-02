@@ -24,7 +24,7 @@ void DiceRoll::setNumberOfRolls (int _numberOfRolls) {
 void DiceRoll::setSidesOfDie (int _sidesOfDie) {
     this->sidesOfDie = _sidesOfDie;
 }
-
+// @todo move all these things one file
 int DiceRoll::distributionMaker (int min, int max) {
     static random_device rd;
     static mt19937 generation(rd());

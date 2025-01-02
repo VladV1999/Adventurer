@@ -1,3 +1,8 @@
+# [simple.club]
+# min = 3
+# max = 24
+# rolls = 337
+
 [Artificier]
 cantrips = [
     "Acid Splash",

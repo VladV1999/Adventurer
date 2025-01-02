@@ -1,5 +1,5 @@
 #include "cantrips.h"
-
+// @todo add if a line starts with a comment or a pound, ignore it
 void Cantrips::cantripRead() {
     fstream toml("cantrips.toml");
     string clazz;
