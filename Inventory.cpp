@@ -132,14 +132,14 @@ void Inventory::setClassItem(string _classItem)
     grid.push_back(Item (_classItem));
 
 }
-
+//@todo 
 ostream& operator<<(ostream& outs, const Inventory& inv)
 {
     inv.display(outs);
 
     return outs;
 }
-// Ask why getArmorType is necessary here???
+// @todo change this toa  factory pattern
 Inventory generateInitialInventory(std::string theClass) {
     /*
     auto& clericBag = []() -> Inventory {

@@ -39,7 +39,7 @@ public:
         */
     ;
     
-    // not really sure about making this const-- at one side it is const until added on the other this just feels wrong-- but the display ITSELF is constant
+    // @todo this is fine FOR NOW
     void display(ostream& outs) const;
 
     int getGold();
@@ -77,8 +77,9 @@ private:
     vector<Item> grid;
     Item classItem;
 };
-
+// @todo possibly obsolete as well, remove
 int getRandomDie(int min, int max);
+
 void rollADieForGold(int min, int max, Inventory& inv);
 
 ostream& operator<<(ostream& outs, const Inventory& inv);

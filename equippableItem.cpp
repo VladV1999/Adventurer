@@ -1,6 +1,6 @@
 #include "equippableItem.h"
 using namespace std;
-
+// @todo perhaps put these in a map already, think on it
 string EquippableItem::getArmorType () {
     return this->armorType;
 }
@@ -101,7 +101,7 @@ EquippableItem EquippableItem::weaponTypeDeterminant (string _playerClass) {
     item.weaponType = classToWeaponMap[_playerClass];
     return item;
 }
-
+// @todo remove this not needed
 int RNG(int min, int max) {
     int result;
     static random_device random;
@@ -109,7 +109,7 @@ int RNG(int min, int max) {
     uniform_int_distribution<int> damageDistribution (min, max);
     return damageDistribution(gen);
 }
-
+// @todo remove all of these as well
 uniform_int_distribution<int> roll1d4() {
     return uniform_int_distribution(1, 4);
 }

@@ -24,7 +24,8 @@ void DiceRoll::setNumberOfRolls (int _numberOfRolls) {
 void DiceRoll::setSidesOfDie (int _sidesOfDie) {
     this->sidesOfDie = _sidesOfDie;
 }
-// @todo move all these things one file
+
+// @todo this will be the main mersenne twister engine
 int DiceRoll::distributionMaker (int min, int max) {
     static random_device rd;
     static mt19937 generation(rd());
@@ -39,7 +40,7 @@ void DiceRoll::rollDamageDie (int diceRolls, int min, int max) {
         damage += distributionMaker(min, max);
     }
 }
-
+// @experiment with singleton for now
 DiceRoll& DiceRoll::getInstance()
 {
     if (DiceRoll::theInstance == nullptr) {

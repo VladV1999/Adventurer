@@ -118,19 +118,7 @@ Adventurer::Adventurer(string newname, const CharacterClass desiredClass)
         this->charClass = _charClass;
     }
 
-    //@todo
-    //Find a way to display contents of the enum class
-    //find a way to iterate over said contents
-    // Adventurer static promptForClass (const unordered_set<string>& CLASS_SET) {
-    //     string selection;
-    //     cout << "Pick a class " << endl;
-    //     for (const auto& it : CLASS_SET) {
-    //         cout << it << " ";
-    //     }
-    //     cout << " " << endl;
-    //     return Adventurer(string hi);
-    // }
-    // @todo remove the unnecessary RNG and move them to a RNG file
+    // @todo remove this engine
     int Adventurer::getRandomNumber(int min, int max) {
     static random_device rd;
     static mt19937 gen(rd());

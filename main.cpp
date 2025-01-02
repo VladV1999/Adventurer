@@ -317,7 +317,8 @@ string reusable(string prompt, string tryAgainPrompt, const unordered_set<string
 
     return selection;
 }
-
+// @todo should not be here and should be in adventurer
+// also, the else ifs are painful, switch statement will do
 void performLevelUp(Adventurer& advent) {
     advent.levelUp();
     int pointsToAllocate = 2;
@@ -365,7 +366,8 @@ void performLevelUp(Adventurer& advent) {
         }
     }
 };
-
+// @todo....... this is a big mess, clean everything up from main,
+// it is too cluttered
 int main() {
     // const CharacterClass desiredClass = classStringToEnum(promptForSubclass("Rogue", 3));
     // Ignore everything below this line

@@ -1,3 +1,5 @@
+// @todo think about this class some more, probably remove 
+// add and subtract, and just stick with direct methods, set uses and get uses
 #include "consumableItem.h"
 
 using namespace std;

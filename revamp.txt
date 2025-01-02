@@ -1,7 +1,7 @@
 remove ALL dead/deprecated code
-Compiler driven refactoring
-and refactoring branch
-
-
-
-// Look into standard format
+compiler driven refactoring
+add refactoring branch
+add subdirectories to avoid mess
+integrate Cmake
+Look into std::format for strings only
+look into ostream operator overloading as well for displays

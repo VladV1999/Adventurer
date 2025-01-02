@@ -10,7 +10,7 @@
 
 using std::string;
 using std::cout;
-
+// @todo these should be global
 enum class Attribute {
     Dexterity,
     Strength,
