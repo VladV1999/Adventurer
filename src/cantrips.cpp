@@ -1,7 +1,7 @@
 #include "cantrips.h"
 // @todo add if a line starts with a comment or a pound, ignore it
 void Cantrips::cantripRead() {
-    fstream toml("cantrips.toml");
+    fstream toml("data/cantrips.toml");
     string clazz;
     string cantrip;
     vector<string> cantrips;

@@ -1,1 +1,29 @@
-**/*.exe
+# Build directories
+/build/
+/cmake-build-debug/
+/cmake-build-release/
+
+# Object files, dependency files, and generated files
+*.o
+*.d
+*.so
+*.a
+
+# CMake files and metadata
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+*.cmake
+
+# Logs and temporary files
+*.log
+*.txt
+*.marks
+
+# IDE and editor files
+.vscode/
+.idea/
+
+# OS generated files (macOS, Windows, etc.)
+.DS_Store
+Thumbs.db
