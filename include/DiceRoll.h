@@ -20,7 +20,7 @@ class DiceRoll {
 
         void rollDamageDie (int diceRolls, int min, int max);
 
-        int distributionMaker (int min, int max);
+        int distributionMaker (int min, int max) const;
 
         static DiceRoll& getInstance();
 

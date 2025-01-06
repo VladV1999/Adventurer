@@ -2,6 +2,10 @@
 // @todo add if a line starts with a comment or a pound, ignore it
 void Cantrips::cantripRead() {
     fstream toml("data/cantrips.toml");
+    if (!toml.is_open()) {
+        std::cerr << "Error: unable to open or find cantrips.toml file!" << "\n";
+        return;
+    }
     string clazz;
     string cantrip;
     vector<string> cantrips;

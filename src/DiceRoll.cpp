@@ -26,7 +26,7 @@ void DiceRoll::setSidesOfDie (int _sidesOfDie) {
 }
 
 // @todo this will be the main mersenne twister engine
-int DiceRoll::distributionMaker (int min, int max) {
+int DiceRoll::distributionMaker (int min, int max) const {
     static random_device rd;
     static mt19937 generation(rd());
     uniform_int_distribution<int> damageDistribution (min, max);
